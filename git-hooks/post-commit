@@ -1,0 +1,37 @@
+#!/bin/bash
+# post-commit git hook to push the current branch
+#
+
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+REPOSITORY_ROOT=`git rev-parse --show-toplevel`
+REPOSITORY_NAME=`basename $REPOSITORY_ROOT`
+
+echo ""### Branch production pulled from the remote repository ###"
+git pull origin production
+
+echo ""
+
+echo "### Git hooks update ###"
+$REPOSITORY_ROOT/git-hooks/install.sh
+
+echo ""
+
+echo "### Cleanup and optimization of the local repository ###"
+git gc --prune=now
+
+echo ""
+
+echo "### Cleanup of the remote repository ###"
+git remote prune origin
+
+echo ""
+
+echo "### Branch $CURRENT_BRANCH pushed to the remote repository ###"
+git push origin $CURRENT_BRANCH
+
+echo ""
+
+echo "### r10k deployment ###"
+ssh -A root@pupuppet001 "/usr/local/bin/r10k deploy module -v -e $CURRENT_BRANCH $REPOSITORY_NAME"
+
+echo ""
