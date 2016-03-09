@@ -1,7 +1,4 @@
 #!/usr/bin/perl -w
-# 
-# File managed by puppet, don't edit directly
-#
 
 # Heavily based on the script from:
 # check_mem.pl Copyright (C) 2000 Dan Larsson <dl@tyfon.net>
@@ -267,4 +264,3 @@ sub finish {
     print "$msg\n";
     exit $state;
 }
-
