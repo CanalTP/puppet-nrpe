@@ -1,4 +1,5 @@
 class nrpe::config (
+  $config_nrpe_ensure   = $nrpe::config_nrpe_ensure,
   $config_nrpe_user     = $nrpe::config_nrpe_user,
   $config_nrpe_group    = $nrpe::config_nrpe_group,
   $config_allowed_hosts = $nrpe::config_allowed_hosts,
@@ -12,6 +13,7 @@ class nrpe::config (
   }
 
   file { '/etc/nagios/nrpe.cfg':
+    ensure  => file,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',

@@ -3,8 +3,9 @@ require 'spec_helper'
 describe 'nrpe::config', :type => :class do
   let :default_params do
     {
-      :config_nrpe_user  => 'root',
-      :config_nrpe_group => 'root',
+      :config_nrpe_ensure => 'file',
+      :config_nrpe_user   => 'root',
+      :config_nrpe_group  => 'root',
     }
   end
 
