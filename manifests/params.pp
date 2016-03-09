@@ -15,6 +15,8 @@ class nrpe::params {
         }
         '7': {
         }
+        'Default': {
+        }
       }
     }
     'Debian': {
@@ -32,9 +34,13 @@ class nrpe::params {
           $config_plugins_dir = '/usr/lib/nagios/plugins'
         }
         '8': {
+        'Default': {
+        }
           $config_plugins_dir = '/usr/lib/nagios/plugins'
         }
       }
+    }
+    'Default': {
     }
   }
 
