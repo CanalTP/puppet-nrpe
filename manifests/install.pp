@@ -8,6 +8,11 @@ class nrpe::install (
     noop => $if_noop,
   }
 
-  create_resources ( package, hiera('nrpe::packages'), $defaults )
+  #create_resources ( package, hiera('nrpe::packages'), $defaults )
+
+  package { $package_name:
+    ensure => $package_ensure,
+    noop   => $if_noop,
+  }
 
 }
