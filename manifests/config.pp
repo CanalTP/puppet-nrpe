@@ -18,7 +18,7 @@ class nrpe::config (
     content => template('nrpe/nrpe.cfg.erb'),
   }
 
-  file { "${config_include_dir}check_common.cfg":
+  file { "${config_include_dir}/check_common.cfg":
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
