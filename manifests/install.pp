@@ -1,7 +1,7 @@
 class nrpe::install (
   $package_name   = $nrpe::package_name,
   $package_ensure = $nrpe::package_ensure,
-  $if_noop        = $nrpe::brsnoop,
+  $if_noop        = $nrpe::if_noop,
 ) {
 
   $defaults = {
