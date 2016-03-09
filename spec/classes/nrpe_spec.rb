@@ -13,6 +13,7 @@ describe 'nrpe', :type => :class do
       }
     end
     it { is_expected.to compile }
+    it { is_expected.to contain_class('nrpe::params') }
     it { is_expected.to contain_class('nrpe::install') }
     it { is_expected.to contain_class('nrpe::config') }
     it { is_expected.to contain_class('nrpe::service') }
@@ -29,6 +30,7 @@ describe 'nrpe', :type => :class do
       }
     end
     it { is_expected.to compile }
+    it { is_expected.to contain_class('nrpe::params') }
     it { is_expected.to contain_class('nrpe::install') }
     it { is_expected.to contain_class('nrpe::config') }
     it { is_expected.to contain_class('nrpe::service') }
@@ -44,6 +46,7 @@ describe 'nrpe', :type => :class do
       }
     end
     it { is_expected.to compile }
+    it { is_expected.to contain_class('nrpe::params') }
     it { is_expected.to contain_class('nrpe::install') }
     it { is_expected.to contain_class('nrpe::config') }
     it { is_expected.to contain_class('nrpe::service') }
@@ -59,6 +62,7 @@ describe 'nrpe', :type => :class do
       }
     end
     it { is_expected.to compile }
+    it { is_expected.to contain_class('nrpe::params') }
     it { is_expected.to contain_class('nrpe::install') }
     it { is_expected.to contain_class('nrpe::config') }
     it { is_expected.to contain_class('nrpe::service') }
