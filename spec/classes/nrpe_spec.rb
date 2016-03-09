@@ -5,11 +5,11 @@ describe 'nrpe', :type => :class do
   context "On debian 7" do
     let :facts do
       {
-        :osfamily               => 'Debian',
-        :operatingsystem        => 'Debian',
-        :lsbdistid              => 'Debian',
-        :operatingsystemrelease => '7.0',
-        :lsbdistcodename        => 'wheezy',
+        :osfamily                  => 'Debian',
+        :operatingsystem           => 'Debian',
+        :lsbdistid                 => 'Debian',
+	:operatingsystemmajrelease => '7',
+        :lsbdistcodename           => 'wheezy',
       }
     end
     it { is_expected.to compile }
@@ -21,11 +21,11 @@ describe 'nrpe', :type => :class do
   context "On Debian 8" do
     let :facts do
       {
-        :osfamily               => 'Debian',
-        :operatingsystem        => 'Debian',
-        :lsbdistid              => 'Debian',
-        :operatingsystemrelease => '8.0',
-        :lsbdistcodename        => 'jessie',
+        :osfamily                  => 'Debian',
+        :operatingsystem           => 'Debian',
+        :lsbdistid                 => 'Debian',
+        :operatingsystemmajrelease => '8',
+        :lsbdistcodename           => 'jessie',
       }
     end
     it { is_expected.to compile }
