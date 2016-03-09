@@ -10,7 +10,7 @@ class nrpe (
   $service_ensure       = running,
   $service_enabled      = true,
   $if_noop              = $::clientnoop,
-) {
+) inherits ::nrpe::params {
 
   class { '::nrpe::install': } ->
   class { '::nrpe::config': } ~>
