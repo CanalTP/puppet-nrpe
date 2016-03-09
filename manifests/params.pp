@@ -21,6 +21,7 @@ class nrpe::params {
     $config_nrpe_group  = 'nagios'
     $config_include_dir = '/etc/nagios/nrpe.d'
     $service_name       = 'nagios-nrpe-server'
+      $config_plugins_dir = '/usr/lib/nagios/plugins'
 
     if $::operatingsystemmajrelease == 6 {
       $config_plugins_dir = '/usr/lib64/nagios/plugins'
