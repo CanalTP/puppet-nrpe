@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'nrpe', :type => :class do
 
-  context "On Ddebian 7" do
+  context "On Debian 7" do
     let :facts do
       {
         :osfamily                  => 'Debian',

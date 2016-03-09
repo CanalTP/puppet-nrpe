@@ -1,23 +1,6 @@
 class nrpe::params {
 
   case $::osfamily {
-    'RedHat': {
-
-      $package_name       = ['nrpe', 'nagios-plugins-all']
-      $config_nrpe_user   = 'nrpe'
-      $config_nrpe_group  = 'nrpe'
-      $config_include_dir = '/etc/nrpe.d'
-      $config_plugins_dir = '/usr/lib64/nagios/plugins'
-      $service_name       = 'nrpe'
-
-      case $::operatingsystemmajrelease {
-        '6': {
-        }
-        '7': {
-        }
-        default: { }
-      }
-    }
     'Debian': {
       $package_name       = ['nagios-nrpe-server', 'nagios-plugins']
       $config_nrpe_user   = 'nagios'
@@ -34,6 +17,23 @@ class nrpe::params {
         }
         '8': {
           $config_plugins_dir = '/usr/lib/nagios/plugins'
+        }
+        default: { }
+      }
+    }
+    'RedHat': {
+
+      $package_name       = ['nrpe', 'nagios-plugins-all']
+      $config_nrpe_user   = 'nrpe'
+      $config_nrpe_group  = 'nrpe'
+      $config_include_dir = '/etc/nrpe.d'
+      $config_plugins_dir = '/usr/lib64/nagios/plugins'
+      $service_name       = 'nrpe'
+
+      case $::operatingsystemmajrelease {
+        '6': {
+        }
+        '7': {
         }
         default: { }
       }
