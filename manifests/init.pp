@@ -17,7 +17,7 @@ class nrpe (
   class { '::nrpe::service': } ->
   Class['nrpe']
 
-  notify { $::clientnoop: } 
-  notify { $if_noop: } 
+  notify { $::clientnoop: }
+  notify { $if_noop: }
 
 }
