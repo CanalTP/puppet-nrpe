@@ -20,11 +20,11 @@ class nrpe::config (
     content => template('nrpe/nrpe.cfg.erb'),
   }
 
-  file { "${config_include_dir}/check_common.cfg":
+  file { "${config_include_dir}/ctp.cfg":
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('nrpe/check_common.cfg.erb'),
+    content => template('nrpe/ctp.cfg.erb'),
   }
 
   file { 'NRPE plugins deployment':
