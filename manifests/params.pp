@@ -12,9 +12,9 @@ class nrpe::params {
 
       case $::operatingsystemmajrelease {
         '6': {
-	}
+        }
         '7': {
-	}
+        }
       }
     }
     'Debian': {
@@ -27,13 +27,13 @@ class nrpe::params {
       case $::operatingsystemmajrelease {
         '6': {
           $config_plugins_dir = '/usr/lib64/nagios/plugins'
-	}
+        }
         '7': {
           $config_plugins_dir = '/usr/lib/nagios/plugins'
-	}
+        }
         '8': {
           $config_plugins_dir = '/usr/lib/nagios/plugins'
-	}
+        }
       }
     }
   }
