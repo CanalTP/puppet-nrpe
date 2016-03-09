@@ -20,7 +20,7 @@ describe 'nrpe::config', :type => :class do
     let :params do default_params end
 
     it { is_expected.to contain_file("/etc/nagios/nrpe.cfg").with( 
-      :ensure => 'present', 
+      :ensure => 'file', 
       :path   => '/etc/nagios/nrpe.cfg',
       :owner  => 'root', 
       :group  => 'root', 
@@ -41,7 +41,7 @@ describe 'nrpe::config', :type => :class do
     let :params do default_params end
 
     it { is_expected.to contain_file("/etc/nagios/nrpe.cfg").with( 
-      :ensure => 'present', 
+      :ensure => 'file', 
       :path   => '/etc/nagios/nrpe.cfg',
       :owner  => 'root', 
       :group  => 'root', 
