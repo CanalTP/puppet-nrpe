@@ -1,12 +1,12 @@
 {
-  "name": "ryayon/mongodb",
+  "name": "ryayon/nrpe",
   "version": "0.1.0",
   "author": "ryayon",
-  "summary": "Installs and manages MongoDB",
+  "summary": "Installs and manages NRPE",
   "license": "Apache-2.0",
-  "source": "git://github.com:ryayon/puppet-mongodb.git",
-  "project_page": "https://github.com/ryayon/puppet-mongodb",
-  "issues_url": "https://github.com/ryayon/puppet-mongodb/issues",
+  "source": "git://github.com:ryayon/puppet-nrpe.git",
+  "project_page": "https://github.com/ryayon/puppet-nrpe",
+  "issues_url": "https://github.com/ryayon/puppet-nrpe/issues",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 2.4.0 < 5.0.0"},
     {"name":"puppetlabs/concat","version_requirement":">= 1.1.1 < 2.0.0"}
@@ -25,5 +25,5 @@
       "version_requirement": ">= 3.0.0 < 5.0.0"
     }
   ],
-  "description": "Module for MongoDB management"
+  "description": "Module for NRPE management"
 }

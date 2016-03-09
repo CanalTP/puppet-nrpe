@@ -3,4 +3,4 @@ fixtures:
     stdlib: "puppetlabs/stdlib"
     concat: "puppetlabs/concat"
   symlinks:
-    mongodb: "#{source_dir}"
+    nrpe: "#{source_dir}"
