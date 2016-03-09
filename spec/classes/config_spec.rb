@@ -3,11 +3,8 @@ require 'spec_helper'
 describe 'nrpe::config', :type => :class do
   let :default_params do
     {
-      :config_file_path  => '/etc/nagios',
-      :config_file_name  => 'mongod.conf',
-      :config_file_owner => 'root',
-      :config_file_group => 'root',
-      :config_file_mode  => '0644',
+      :config_nrpe_user  => 'root',
+      :config_nrpe_group => 'root',
     }
   end
 
@@ -21,7 +18,7 @@ describe 'nrpe::config', :type => :class do
     end
     let :params do default_params end
 
-    it { is_expected.to contain_concat("/etc/nagios/nrpe.cfg").with( 
+    it { is_expected.to contain_file("/etc/nagios/nrpe.cfg").with( 
       :ensure => 'present', 
       :path   => '/etc/nagios/nrpe.cfg',
       :owner  => 'root', 
@@ -42,7 +39,7 @@ describe 'nrpe::config', :type => :class do
     end
     let :params do default_params end
 
-    it { is_expected.to contain_concat("/etc/nagios/nrpe.cfg").with( 
+    it { is_expected.to contain_file("/etc/nagios/nrpe.cfg").with( 
       :ensure => 'present', 
       :path   => '/etc/nagios/nrpe.cfg',
       :owner  => 'root', 
