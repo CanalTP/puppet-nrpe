@@ -32,7 +32,7 @@ class nrpe::config (
     source  => 'puppet:///modules/nrpe/plugins',
     owner   => 'root',
     group   => 'root',
-    mode    => '4755',
+    mode    => '0755',
     recurse =>  true,
   }
 
