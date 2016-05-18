@@ -4,7 +4,7 @@
 RETURN_CODE = 3
 
 try:
-    import requests0 as requests
+    import requests
 except ImportError:
     print("UNKNOWN: Please install python-requests")
     exit(RETURN_CODE)

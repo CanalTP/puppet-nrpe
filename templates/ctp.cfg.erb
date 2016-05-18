@@ -96,6 +96,9 @@ command[restart-sum]=<%= @config_plugins_dir %>/contrib/restart_tomcat-sum.sh $A
 # return requests/min found on a logfile
 command[check_log_requests]=<%= @config_plugins_dir %>/contrib/check_log_requests.sh $ARG1$
 
+# return requests/min found on a logfile and filter on patern
+command[check_log_requests_patern]=<%= @config_plugins_dir %>/contrib/req_minutes_paterne.sh $ARG1$ $ARG2$
+
 # return total cpu usage
 command[check_cpu]=<%= @config_plugins_dir %>/contrib/check_cpu.sh
 
@@ -130,3 +133,9 @@ command[check_req_minutes_syslog]=<%= @config_plugins_dir %>/contrib/req_minutes
 # check for syslog for count requests by minutes
 command[check_timetaken_GW_syslog]=<%= @config_plugins_dir %>/contrib/timetaken_GW_syslog.sh $ARG1$ 
 
+######################################################
+######               ACTIONS                   #######
+######################################################
+
+# Reload apache
+command[action_reload_apache]=<%= @config_plugins_dir %>/contrib/action_reload_apache.sh $ARG1$ $ARG2$
