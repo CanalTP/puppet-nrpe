@@ -13,6 +13,7 @@ function Usage {
 
         OPTIONS:
         -p - The process name to look for
+	-f - The field number where the process name is
         -w - The warning to use for the CPU percentage used
         -c - The critical to use for the CPU percentage used
         -m - The warning to use for the Memory percentage used
@@ -28,11 +29,14 @@ function Usage {
         exit 3
 }
 
-while getopts "p:w:c:m:n:" OPTION
+while getopts "p:w:c:m:n:f:" OPTION
 do
         case $OPTION in
                 p)
                         PROC=$OPTARG
+                  ;;
+                f)
+                        FIELDNBR=$OPTARG
                   ;;
 
                 w)
@@ -58,7 +62,7 @@ if [[ $PROC == 0 ]]; then
         Usage
 fi
 
-PSOUTPUT=`ps aux | grep $PROC`
+PSOUTPUT=`ps aux | grep $PROC | egrep -v "grep|$(basename $0)"`
 OIFS="${IFS}"
 NIFS=$'\n'
 
@@ -72,7 +76,7 @@ COUNT=0
 
 for LINE in ${PSOUTPUT}; do
         CPU=$(echo $LINE | awk '{ print $3 }')
-        COMMAND=$(echo $LINE | awk '{ print $11 }')
+        COMMAND=$(echo $LINE | awk -v fieldnbr=${FIELDNBR} '{ print $fieldnbr }')
         MEM=$(echo $LINE | awk '{ print $4 }')
         RSS=$(echo $LINE | awk '{ print $6 }')
         VSZ=$(echo $LINE | awk '{ print $5 }')

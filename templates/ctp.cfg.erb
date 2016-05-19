@@ -134,7 +134,7 @@ command[check_req_minutes_syslog]=<%= @config_plugins_dir %>/contrib/req_minutes
 command[check_timetaken_GW_syslog]=<%= @config_plugins_dir %>/contrib/timetaken_GW_syslog.sh $ARG1$ 
 
 # return cpu/memory usage for a process
-command[check_cpu_mem_proc]=<%= @config_plugins_dir %>/contrib/check_cpu_proc.sh -p $ARG1$ -w $ARG2$ -c $ARG3$ -m $ARG4$ -n $ARG5$
+command[check_cpu_mem_proc]=<%= @config_plugins_dir %>/contrib/check_cpu_proc.sh -p $ARG1$ -f $ARG2$ -w $ARG3$ -c $ARG4$ -m $ARG5$ -n $ARG6$
 
 ######################################################
 ######               ACTIONS                   #######
