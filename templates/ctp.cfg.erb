@@ -140,7 +140,7 @@ command[check_cpu_mem_proc]=<%= @config_plugins_dir %>/contrib/check_cpu_proc.sh
 command[check_keepalived_master]=<%= @config_plugins_dir %>/contrib/check_keepalived_vrrp.pl -a localhost -c $ARG1$ -m
 
 # check keepalived backup status
-command[check_keepalived_master]=<%= @config_plugins_dir %>/contrib/check_keepalived_vrrp.pl -a localhost -c $ARG1$ -b
+command[check_keepalived_backup]=<%= @config_plugins_dir %>/contrib/check_keepalived_vrrp.pl -a localhost -c $ARG1$ -b
 
 ######################################################
 ######               ACTIONS                   #######
