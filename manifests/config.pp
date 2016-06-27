@@ -37,8 +37,8 @@ class nrpe::config (
   } ->
   file { ["${config_plugins_dir}/check_dhcp",
           "${config_plugins_dir}/check_fping",
-	  "${config_plugins_dir}/check_icmp",
-	  "${config_plugins_dir}/check_ide_smart"]:
+          "${config_plugins_dir}/check_icmp",
+          "${config_plugins_dir}/check_ide_smart"]:
     owner   => 'root',
     group   => 'root',
     mode    => '4755',
