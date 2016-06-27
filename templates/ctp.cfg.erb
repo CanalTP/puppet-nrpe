@@ -136,7 +136,7 @@ command[check_timetaken_GW_syslog]=<%= @config_plugins_dir %>/contrib/timetaken_
 # return cpu/memory usage for a process
 command[check_cpu_mem_proc]=<%= @config_plugins_dir %>/contrib/check_cpu_proc.sh -p $ARG1$ -f $ARG2$ -w $ARG3$ -c $ARG4$ -m $ARG5$ -n $ARG6$
 
-# check keepalived status
+# check for keepalived vrrp status
 command[check_keepalived]=<%= @config_plugins_dir %>/contrib/check_keepalived_vrrp.pl -a localhost -c $ARG1$
 
 ######################################################
