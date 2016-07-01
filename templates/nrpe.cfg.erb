@@ -56,8 +56,8 @@ nrpe_group=<%= @config_nrpe_group %>
 # you are running this daemon on.
 #
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
-allowed_hosts=127.0.0.1<% if @config_allowed_hosts -%><% @config_allowed_hosts.each do |allowed_hosts| %>,<%= allowed_hosts %><% end %><% end %>
-
+#allowed_hosts=127.0.0.1<% if @config_allowed_hosts -%><% @config_allowed_hosts.each do |allowed_hosts| %>,<%= allowed_hosts %><% end %><% end %>
+allowed_hosts=127.0.0.1<% if @config_allowed_hosts -%><%= @config_allowed_hosts.join(',') %><% end %>
 
 # COMMAND ARGUMENT PROCESSING
 # This option determines whether or not the NRPE daemon will allow clients
