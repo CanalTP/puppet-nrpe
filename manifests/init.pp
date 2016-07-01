@@ -12,6 +12,8 @@ class nrpe (
   $if_noop              = $::clientnoop,
 ) inherits ::nrpe::params {
 
+  notify {$config_allowed_hosts:}
+
   class { '::nrpe::install': } ->
   class { '::nrpe::config': } ~>
   class { '::nrpe::service': } ->
