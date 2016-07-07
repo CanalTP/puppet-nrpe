@@ -139,6 +139,9 @@ command[check_cpu_mem_proc]=<%= @config_plugins_dir %>/contrib/check_cpu_proc.sh
 # check for keepalived vrrp status
 command[check_keepalived]=<%= @config_plugins_dir %>/contrib/check_keepalived_vrrp.pl -a localhost -c $ARG1$
 
+# Check http
+command[check_http]=<%= @config_plugins_dir %>/check_http -H $ARG1$ -r $ARG2$ -w $ARG3$ -c $ARG4$
+
 ######################################################
 ######               ACTIONS                   #######
 ######################################################
