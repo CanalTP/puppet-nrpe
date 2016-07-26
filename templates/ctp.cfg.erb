@@ -142,6 +142,9 @@ command[check_keepalived]=<%= @config_plugins_dir %>/contrib/check_keepalived_vr
 # Check http
 command[check_http]=<%= @config_plugins_dir %>/check_http -H $ARG1$ -u $ARG2$ -w $ARG3$ -c $ARG4$
 
+# Check https
+command[check_https]=<%= @config_plugins_dir %>/check_http -H $ARG1$ -S -u $ARG2$ -w $ARG3$ -c $ARG4$
+
 ######################################################
 ######               ACTIONS                   #######
 ######################################################
