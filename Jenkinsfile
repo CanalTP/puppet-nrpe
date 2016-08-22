@@ -7,7 +7,7 @@ node('docker-puppet') {
   stage 'puppet lint'
 
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-      sh 'puppet-lint --no-documentation-check .'
+      sh 'puppet-lint --no-documentation-check --no-140chars-check .'
     }
 
   stage 'r10k deployment'
