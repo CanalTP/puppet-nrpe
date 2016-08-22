@@ -133,6 +133,18 @@ command[check_req_minutes_syslog]=<%= @config_plugins_dir %>/contrib/req_minutes
 # check for syslog for count requests by minutes
 command[check_timetaken_GW_syslog]=<%= @config_plugins_dir %>/contrib/timetaken_GW_syslog.sh $ARG1$ 
 
+# return cpu/memory usage for a process
+command[check_cpu_mem_proc]=<%= @config_plugins_dir %>/contrib/check_cpu_proc.sh -p $ARG1$ -f $ARG2$ -w $ARG3$ -c $ARG4$ -m $ARG5$ -n $ARG6$
+
+# check for keepalived vrrp status
+command[check_keepalived]=<%= @config_plugins_dir %>/contrib/check_keepalived_vrrp.pl -a localhost -c $ARG1$
+
+# Check http
+command[check_http]=<%= @config_plugins_dir %>/check_http -H $ARG1$ -u $ARG2$ -w $ARG3$ -c $ARG4$
+
+# Check https
+command[check_https]=<%= @config_plugins_dir %>/check_http -H $ARG1$ -S -u $ARG2$ -w $ARG3$ -c $ARG4$
+
 ######################################################
 ######               ACTIONS                   #######
 ######################################################
