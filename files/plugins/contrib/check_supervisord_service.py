@@ -13,7 +13,7 @@ def main():
       print usage
       exit(3)
    var=options.service
-   p = subprocess.Popen(["sudo","/usr/bin/supervisorctl","status "+var], stdout=subprocess.PIPE)
+   p = subprocess.Popen(["sudo","/usr/local/bin/supervisorctl","status "+var], stdout=subprocess.PIPE)
    out, err = p.communicate()
    if ('RUNNING' in out):
       print('Started')
