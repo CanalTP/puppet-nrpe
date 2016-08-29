@@ -121,6 +121,9 @@ command[check_logstash]=<%= @config_plugins_dir %>/contrib/check_logstash.py --r
 # check if supervisord services is running
 command[check_supervisord]=<%= @config_plugins_dir %>/contrib/check_supervisord.py -p $ARG1$ -s $ARG2$
 
+# check if supervisord services without projet is running
+command[check_supervisord_service]=<%= @config_plugins_dir %>/contrib/check_supervisord_service.py -s $ARG1$
+
 # check flux json in file
 command[check_json]=<%= @config_plugins_dir %>/contrib/check_json.py -f $ARG1$ -k $ARG2$
 
