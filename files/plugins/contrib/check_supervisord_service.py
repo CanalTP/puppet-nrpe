@@ -12,7 +12,7 @@ def main():
    if options.service is None :
       print usage
       exit(3)
-   var=+options.service
+   var=options.service
    p = subprocess.Popen(["sudo","/usr/bin/supervisorctl","status "+var], stdout=subprocess.PIPE)
    out, err = p.communicate()
    if ('RUNNING' in out):
