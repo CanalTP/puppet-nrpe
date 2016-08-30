@@ -15,7 +15,7 @@ node('docker-puppet') {
     sshagent (['b1c38e32-372f-4e8a-b1f4-6a05b8df2f08']) {
       sh "mkdir ~/.ssh && chmod 0700 ~/.ssh"
       sh "echo -e 'Host *\n    StrictHostKeyChecking no' > ~/.ssh/config && chmod 0400 ~/.ssh/config"
-      sh "ssh -A root@ctp-prd-foreman /opt/puppetlabs/puppet/bin/r10k deploy module -e production nrpe -v"
+      sh "ssh -A root@ctp-prd-foreman /opt/puppetlabs/puppet/bin/r10k deploy environment -pv"
     }
 
 }
