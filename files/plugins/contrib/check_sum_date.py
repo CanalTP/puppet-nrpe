@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from argparse import ArgumentParser
 from requests import RequestException
@@ -9,12 +10,11 @@ import requests
 
 # Curl cmd
 auth = ()
-SUM_TEMPLATE_URL = "https://{host}/api/v4/infoVoy/rechercherProchainsDeparts" \
+SUM_TEMPLATE_URL = "http://{host}/api/v4/infoVoy/rechercherProchainsDeparts" \
                     "?codeZoneArret=OCE87723197&Accept=application%2Fjson"
 
 status_message = "{state} - {message}|time={spend_time}ms"
 exit_code = 0
-
 
 class Timer(object):
     """
@@ -68,7 +68,7 @@ if __name__ == "__main__":
             auth = tuple(user_params.auth.split(':'))
         else:
             print("Bad auth format. (login:password)")
-            exit()
+            exit(2)
     else:
         try:
             # Open xml file
@@ -77,17 +77,17 @@ if __name__ == "__main__":
 
             # Find correct authenticate
             for http_auth in root.findall('httpauth'):
-                if match('%s' % user_params.host.split('.')[0], http_auth.text):
+                if match('%s' % user_params.host, http_auth.text):
                     auth = (http_auth.text.split(':')[3], http_auth.text.split(':')[4])
 
         except Exception as e:
             print("Failed to open %s:\n%s" % (user_params.webfile, str(e)))
-            exit()
+            exit(2)
 
     # Try to send http requests
     try:
         # Init header
-        headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+        headers = {'Content-Type': 'application/json', 'Accept': 'application/json', 'Host': "%s.canaltp.fr" % user_params.host.split('.')[0]}
 
         # Init sum_url
         sum_url = SUM_TEMPLATE_URL.format(host=user_params.host)
@@ -96,7 +96,7 @@ if __name__ == "__main__":
         with Timer() as t:
             http_answer = requests.get(sum_url, auth=auth, headers=headers)
 
-        if validate_date(http_answer.json()['appel']['dateHeure']):
+        if validate_date(http_answer.json()['response']['dateHeure']):
             status_message = status_message.format(state="OK", message="DateHeure is valid ISODATE.",
                                                    spend_time=t.elapsed)
         else:
