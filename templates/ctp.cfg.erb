@@ -11,7 +11,7 @@ command[check_mem]=<%= @config_plugins_dir %>/contrib/check_mem.pl -u -w $ARG1$ 
 # seuils en pourcentage restants (le % est déjà défini ici)
 command[check_swap]=<%= @config_plugins_dir %>/check_swap --warning=$ARG1$% --critical=$ARG2$%
 # exclude all virtual (udev, sysfs, etc..) and remote fs (nfs, cifs)
-command[check_all_disks]=<%= @config_plugins_dir %>/check_disk --warning=$ARG1$% --critical=$ARG2$% --iwarning=$ARG3$% --icritical=$ARG4$% --errors-only --exclude-type=tmpfs --exclude-type=udev --exclude-type=proc --exclude-type=sysfs --exclude-type=cifs --exclude-type=nfs --exclude-type=nfs4 --exclude-type=autofs
+command[check_all_disks]=<%= @config_plugins_dir %>/check_disk --warning=$ARG1$% --critical=$ARG2$% --iwarning=$ARG3$% --icritical=$ARG4$% --errors-only -A -I '/var/lib/docker/*' --exclude-type=tmpfs --exclude-type=udev --exclude-type=proc --exclude-type=sysfs --exclude-type=cifs --exclude-type=nfs --exclude-type=nfs4 --exclude-type=autofs
 
 command[check_process]=<%= @config_plugins_dir %>/check_procs --critical=$ARG1$:$ARG2$ --command=$ARG3$
 command[check_process_string]=<%= @config_plugins_dir %>/check_procs --critical=$ARG1$:$ARG2$ --argument-array='$ARG3$' -u $ARG4$
