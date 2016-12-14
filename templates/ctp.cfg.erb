@@ -154,3 +154,7 @@ command[check_https]=<%= @config_plugins_dir %>/check_http -H $ARG1$ -S -u $ARG2
 
 # Reload apache
 command[action_reload_apache]=<%= @config_plugins_dir %>/contrib/action_reload_apache.sh $ARG1$ $ARG2$
+
+# Check docker containers
+command[check_docker_running_containers]=/usr/lib/nagios/plugins/contrib/check_docker.py --status running --connection $ARG1$ --containers $ARG2$
+
