@@ -18,14 +18,18 @@ try:
             .format(url=URL, port=PORT))
 
     if 'green' not in result.json['status']:
-        print("WARNING: the cluster '{cluster_name}' is in {status} status"
-            .format(cluster_name=result.json['cluster_name'], status=result.json['status']))
-        RETURN_CODE = 1
+        if 'yellow' in result.json['status'] and result.json['number_of_nodes'] == 1:
+                print("OK: cluster {} is {} but it is normal with {} node".format(result.json['cluster_name'], result.json['status'], result.json['number_of_nodes']))
+                RETURN_CODE = 0
+        else:
+                print("WARNING: the cluster '{cluster_name}' is in {status} status".format(cluster_name=result.json['cluster_name'], status=result.json['status']))
+                RETURN_CODE = 1
     else:
         print("OK: cluster {} is {}"
                 .format(result.json['cluster_name'],
                         result.json['status']))
         RETURN_CODE = 0
+
 except Exception, e:
     print("ERROR: {}".format(e))
 finally:
