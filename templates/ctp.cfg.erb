@@ -159,7 +159,7 @@ command[action_reload_apache]=<%= @config_plugins_dir %>/contrib/action_reload_a
 command[check_docker_running_containers]=<%= @config_plugins_dir %>/contrib/check_docker.py --status running --connection $ARG1$ --containers $ARG2$
 
 # Check swarm cluster 
-command[check_swarm]=<%= @config_plugins_dir %>/check_swarm_health.sh $ARG1$ $ARG2$ $ARG3$
+command[check_swarm]=<%= @config_plugins_dir %>/contrib/check_swarm_health.sh $ARG1$ $ARG2$ $ARG3$
 
 # Check Tridion
 command[check_odata]=/usr/lib64/nagios/plugins/contrib/check_tridion_odata.sh
