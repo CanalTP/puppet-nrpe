@@ -2,9 +2,9 @@
 #Monitoring swarm heath by quering manager nodes and rise an alerte when problems occured
 #Launch in manager swarm only
  
-HOST_SOCKET=$1
-PORT_SOCKET=$2
-ENV_VALUE=$3
+HOST_SOCKET=localhost
+PORT_SOCKET=$1
+ENV_VALUE=$2
 
 RISE_ERROR=0
 MSG_OUTPUT="Everything is ok in swarm"
@@ -13,8 +13,8 @@ DATE_TIME=$(date +%F_%T)
 function check_parameters()
 {
    logger "[$DATE_TIME] Checking if parameters are corrects"
-   if [ $# -ne 3 ];then
-  	 echo -e "\t \t [SWARM_CLUSTER] \033[31m Parameters are incorrect .. We expect 3 as [IP or DNS] [SOCKET_TCP_BIND] [ENV] \033[0m"
+   if [ $# -ne 2 ];then
+  	 echo -e "\t \t [SWARM_CLUSTER] \033[31m Parameters are incorrect .. We expect 2 as [SOCKET_TCP_BIND] [ENV] \033[0m"
 	 exit 1
    fi
 }
@@ -74,7 +74,7 @@ function get_manager_reachability()
 
 
 #Call functions
-check_parameters $HOST_SOCKET $PORT_SOCKET $ENV_VALUE
+check_parameters $PORT_SOCKET $ENV_VALUE
 get_manager_names
 get_node_unreachability
 get_leader_reachability
