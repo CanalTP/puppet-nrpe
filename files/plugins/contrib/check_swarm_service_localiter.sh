@@ -112,8 +112,8 @@ check_oauth
 
  if [ $PROBE_RISE_AN_ERROR -eq 0 ] && [ $LOG_RISE_AN_ERROR -eq 0 ] && [ $LOCALITER_RISE_AN_ERROR -eq 0 ] && [ $UPLOAD_RISE_AN_ERROR -eq 0 ] && [ $OAUTH2_RISE_AN_ERROR -eq 0 ];then
 	echo "[CLUSTER_SWARM] [MICROSERVICE] $MSG_OUTPUT"
-  	exit 1
+  	exit 0
  else
 	echo "[CLUSTER_SWARM] [MICROSERVICE] $MSG_OUTPUT"
-	exit 0
+	exit 2
  fi

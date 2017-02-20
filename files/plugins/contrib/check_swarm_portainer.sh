@@ -27,8 +27,8 @@ check_portainer
 
  if [ $PORTAINER_RISE_AN_ERROR -eq 0 ];then
 	echo "$MSG_OUTPUT"
-  	exit 1 
+  	exit 0 
  else
 	echo "$MSG_OUTPUT"
-	exit 0
+	exit 2
  fi

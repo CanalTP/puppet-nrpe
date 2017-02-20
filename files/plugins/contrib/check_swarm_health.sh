@@ -82,7 +82,7 @@ get_manager_reachability
 
 if [ $RISE_ERROR -eq 1 ];then
 	echo "[$ENV_VALUE][SWARM_CLUSTER][KO] $MSG_OUTPUT"
-  	exit 1
+  	exit 2
 else
 	echo "[$ENV_VALUE] [SWARM_CLUSTER][OK] $MSG_OUTPUT"
 	exit 0
