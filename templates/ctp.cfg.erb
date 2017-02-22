@@ -163,6 +163,9 @@ command[check_swarm]=<%= @config_plugins_dir %>/contrib/check_swarm_health.sh $A
 command[check_swarm_localiter]=<%= @config_plugins_dir %>/contrib/check_swarm_service_localiter.sh $ARG1$
 command[check_swarm_portainer]=<%= @config_plugins_dir %>/contrib/check_swarm_portainer.sh
 
+# Check backup_mongo
+command[check_mongo_backup]=<%= @config_plugins_dir %>/contrib/status_mongo_backup.sh
+
 # Check Tridion
 command[check_odata]=/usr/lib64/nagios/plugins/contrib/check_tridion_odata.sh
 command[check_deployer]=/usr/lib64/nagios/plugins/contrib/check_tridion_deployer.sh
