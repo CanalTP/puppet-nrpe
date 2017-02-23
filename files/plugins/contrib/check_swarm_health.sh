@@ -19,6 +19,27 @@ function check_parameters()
    fi
 }
 
+function check_given_parameters()
+{
+   logger "[$DATE_TIME] Checking if given parameters are  corrects"
+   GET_PORT_STATUS=$(netstat -nlt |grep $1|awk '{print $NF}')
+
+   if [ -z $GET_PORT_STATUS ];then
+	   ERROR_DOCKER="[ERROR] Docker specified port $1 is unknown .. please ajust it !!"
+  	   echo "[$HOSTNAME][$ENV_VALUE][SWARM_CLUSTER] $ERROR_DOCKER"
+	   exit 2
+   fi
+
+   if [ $GET_PORT_STATUS != "LISTEN" ];then
+            ERROR_DOCKER="[ERROR] Docker daemon is not bind in port $1"
+            echo "[$HOSTNAME][$ENV_VALUE][SWARM_CLUSTER] $ERROR_DOCKER"
+	    exit 2
+   else
+	    ERROR_DOCKER="[OK] Docker daemon is well attached on port $1"
+	    echo "[$HOSTNAME][$ENV_VALUE][SWARM_CLUSTER] $ERROR_DOCKER"
+   fi
+}
+
 function get_manager_names()
 {
     logger "[$DATE_TIME] Getting list manager node from master node"
@@ -35,8 +56,6 @@ function get_node_unreachability()
 	if [ ! -z ${GET_BROKEN_NODE} ];then
    		RISE_ERROR=1
 		MSG_OUTPUT="Node $srv is unreachable"
-	else
-		echo "debug"
 	fi
    done
 }
@@ -75,6 +94,7 @@ function get_manager_reachability()
 
 #Call functions
 check_parameters $PORT_SOCKET $ENV_VALUE
+check_given_parameters $PORT_SOCKET 
 get_manager_names
 get_node_unreachability
 get_leader_reachability
