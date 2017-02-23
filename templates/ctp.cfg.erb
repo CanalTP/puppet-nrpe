@@ -159,7 +159,7 @@ command[action_reload_apache]=<%= @config_plugins_dir %>/contrib/action_reload_a
 command[check_docker_running_containers]=<%= @config_plugins_dir %>/contrib/check_docker.py --status running --connection $ARG1$ --containers $ARG2$
 
 # Swarm cluster stuff 
-command[check_swarm]=<%= @config_plugins_dir %>/contrib/check_swarm_health.sh $ARG1$ $ARG2$ $ARG3$
+command[check_swarm]=<%= @config_plugins_dir %>/contrib/check_swarm_health.sh $ARG1$ $ARG2$ 
 command[check_swarm_localiter]=<%= @config_plugins_dir %>/contrib/check_swarm_service_localiter.sh $ARG1$
 command[check_swarm_portainer]=<%= @config_plugins_dir %>/contrib/check_swarm_portainer.sh
 
