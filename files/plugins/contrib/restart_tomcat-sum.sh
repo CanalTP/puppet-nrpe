@@ -20,13 +20,13 @@ Cordialement."
     ;;
   "datetime")
     body="Bonjour
-Les valeur des clés dateHeure dans la réponse json de ${HOSTNAME} n'est pas valide. Restart du serveur.
+Les valeur des cles dateHeure dans la réponse json de ${HOSTNAME} n'est pas valide. Restart du serveur.
 
 Cordialement."
     ;;
   *)
 	body="Bonjour
-Load élvé détecté/dateHeure non ISO, le redémarrage de TOMCAT-SUM a été effectué sur le serveur ${HOSTNAME}.
+Load eleve detecte/dateHeure non ISO, le redémarrage de TOMCAT-SUM a ete effectue sur le serveur ${HOSTNAME}.
 
 Cordialement"  
 esac
