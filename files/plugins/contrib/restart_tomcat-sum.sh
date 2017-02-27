@@ -5,13 +5,13 @@
 #Initialisation des Variables
 service_status=$1
 nb_retry=$2
-restart_reson=$3 
+restart_reason=$3 
 
 DEST_MAIL="dt.exploitation@canaltp.fr"
 SUBJECT_MAIL="Redemarrage automatique de Tomcat-SUM sur ${HOSTNAME}"
 
 # Define body message
-case ${restart_reson} in
+case ${restart_reason} in
   "load")
     body="Bonjour,
 Load eleve detecte, le redemarrage de TOMCAT-SUM a ete effectue sur le serveur ${HOSTNAME}.
