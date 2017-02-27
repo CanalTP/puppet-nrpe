@@ -14,7 +14,7 @@ SUBJECT_MAIL="Redemarrage automatique de Tomcat-SUM sur ${HOSTNAME}"
 case ${restart_reson} in
   "load")
     body="Bonjour,
-Load eleve detecte, le redemarrage de TOMCAT-SUM a ete effectue sur le serveur ${HOSTNAME}
+Load eleve detecte, le redemarrage de TOMCAT-SUM a ete effectue sur le serveur ${HOSTNAME}.
 
 Cordialement."
     ;;
@@ -24,6 +24,11 @@ Les valeur des clés dateHeure dans la réponse json de ${HOSTNAME} n'est pas va
 
 Cordialement."
     ;;
+  *)
+	body="Bonjour
+Load élvé détecté/dateHeure non ISO, le redémarrage de TOMCAT-SUM a été effectué sur le serveur ${HOSTNAME}.
+
+Cordialement"  
 esac
 
 
