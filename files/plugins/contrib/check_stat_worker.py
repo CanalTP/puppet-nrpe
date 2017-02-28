@@ -4,7 +4,7 @@
 import requests
 
 CRITICAL = 2
-RETURN_CODE = 3
+RETURN_CODE = 2
 
 try:
         r = requests.get('http://nav2-pre-logn1.canaltp.prod:9999/proxy:spark-master:8080/metrics/master/json/')
