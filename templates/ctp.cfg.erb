@@ -15,7 +15,7 @@ command[check_all_disks]=<%= @config_plugins_dir %>/check_disk --warning=$ARG1$%
 
 command[check_process]=<%= @config_plugins_dir %>/check_procs --critical=$ARG1$:$ARG2$ --command=$ARG3$
 command[check_process_string]=<%= @config_plugins_dir %>/check_procs --critical=$ARG1$:$ARG2$ --argument-array='$ARG3$' -u $ARG4$
-command[check_ntp]=<%= @config_plugins_dir %>/check_ntp_time --hostname=$ARG1$
+command[check_ntp]=<%= @config_plugins_dir %>/check_ntp_time --hostname=$ARG1$ -4
 command[check_dns]=<%= @config_plugins_dir %>/check_dns --hostname=$ARG1$
 
 # check pour worker/dispatcher
