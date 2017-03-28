@@ -96,7 +96,7 @@ if __name__ == "__main__":
         with Timer() as t:
             http_answer = requests.get(sum_url, auth=auth, headers=headers)
 
-        if validate_date(http_answer.json()['response']['dateHeure']):
+        if validate_date(http_answer.json()['appel']['dateHeure']) and validate_date(http_answer.json()['response']['dateHeure']):
             status_message = status_message.format(state="OK", message="DateHeure is valid ISODATE.",
                                                    spend_time=t.elapsed)
         else:
