@@ -149,7 +149,7 @@ command[check_http]=<%= @config_plugins_dir %>/check_http -H $ARG1$ -u $ARG2$ -w
 command[check_https]=<%= @config_plugins_dir %>/check_http -H $ARG1$ -S -u $ARG2$ -w $ARG3$ -c $ARG4$
 
 # Check certificate end date
-command[check_certifcate_end_date]=<%= @config_plugins_dir %>/check_certificate_enddate_file.sh $ARG1$
+command[check_certifcate_end_date]=<%= @config_plugins_dir %>/crontib/check_certificate_enddate_file.sh $ARG1$
 
 ######################################################
 ######               ACTIONS                   #######
