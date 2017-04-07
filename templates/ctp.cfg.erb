@@ -151,6 +151,9 @@ command[check_https]=<%= @config_plugins_dir %>/check_http -H $ARG1$ -S -u $ARG2
 # Check certificate end date
 command[check_certificate_end_date]=<%= @config_plugins_dir %>/contrib/check_certificate_enddate_file.sh $ARG1$
 
+# Check supervisord by container
+command[check_spam_supervisor]=<%= @config_plugins_dir %>/contrib/check_spam_supervisor.py -s $ARG1$ -c $ARG2$
+
 ######################################################
 ######               ACTIONS                   #######
 ######################################################
