@@ -86,6 +86,7 @@ if __name__ == "__main__":
 
         except ValueError:
             check_spam_service_output.append("Supervision {} no {} correct value".format(element.tag, "last_run"))
+            check_spam_service_status = 2
         except KeyError:
             check_spam_service_output.append("Supervision {} no {} key".format(element.tag, "last_run"))
 
