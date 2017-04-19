@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 # check if 3 workers is running for stat nav2
 
+from sys import argv
 import requests
 
 CRITICAL = 0
 NORMAL = 3
 RETURN_CODE = 0
 
+URL = argv[1]
+
 try:
-        r = requests.get('http://nav2-pre-logn1.canaltp.prod:9999/proxy:spark-master:8080/metrics/master/json/')
+        r = requests.get(URL)
 
         metrics = r.json()
         nb_worker = metrics['gauges']['master.aliveWorkers']['value']
