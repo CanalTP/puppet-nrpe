@@ -33,7 +33,7 @@ then
 	fi
 fi
 #On cherche si des fichiers sont present et on stock le resultat dans un fichier log
-find  $dossier -name "$fic" -mmin +$min -maxdepth 1 -type f > /tmp/check_file_age.log
+find  $dossier -maxdepth 1 -type f -name "$fic" -mmin +$min > /tmp/check_file_age.log
 
 #si le fichier log est vide c'est qu'il n'y a pas de fichier
 if [ "$?" == "0" ] && [ "$(cat /tmp/check_file_age.log)" == "" ]
