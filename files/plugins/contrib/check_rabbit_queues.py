@@ -1,21 +1,24 @@
 #! /usr/bin/env python
+# -*- coding: UTF-8 -*-
 
-#############################################
-# Nagios probe that checks RabbitMQ
-# queues that are not empty.
-#
-# On the target machine,
-# you must edit sudoers with this command:
-# visudo -f /etc/sudoers
-# and add this line at the end of the file:
-# nagios ALL = (root) NOPASSWD: /usr/sbin/rabbitmqctl
-#############################################
+"""
+Nagios probe that checks rabbitmqctl
+queues that are not empty.
+On the target machine,
+you must edit sudoers with this command:
+visudo -f /etc/sudoers
+and add this line at the end of the file:
+nagios ALL = (root) NOPASSWD: /usr/sbin/rabbitmqctl
+"""
 
 from __future__ import print_function
 import os.path
 import subprocess
 
 from clingon import clingon
+
+__author__ = u'François Vincent (initial author)'
+
 
 debug = False
 clingon.DEBUG = debug
