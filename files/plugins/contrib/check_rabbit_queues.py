@@ -50,7 +50,7 @@ def print_message_exit(reported, truncate, limit):
         more = len(reported) > truncate
         reported = reported[:truncate]
     print('RabbitMQ queues not empty or messages limit (' + str(limit) + ') has been reached : ' + ', '.join(reported) + (' (more)' if more else ''))
-    exit(NAGIOS_WARNING)
+    exit(NAGIOS_CRITICAL)
 
 
 @clingon.clize
