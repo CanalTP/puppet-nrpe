@@ -112,6 +112,9 @@ command[check_syslog]=<%= @config_plugins_dir %>/contrib/check_syslog.pl --logho
 # check local PGPool
 command[check_pgpool]=<%= @config_plugins_dir %>/contrib/check_pgpool_2.pl -H 127.0.0.1 -u $ARG1$ -p $ARG2$
 
+# check local PGPool on Debian Jessie
+command[check_pgpool_debian_jessie]=<%= @config_plugins_dir %>/contrib/check_pgpool_debian_jessie.pl -H 127.0.0.1 -u $ARG1$ -p $ARG2$
+
 # check Elasticsearch cluster status
 command[check_elasticsearch_cluster]=<%= @config_plugins_dir %>/contrib/check_elasticsearch_cluster.py
 
