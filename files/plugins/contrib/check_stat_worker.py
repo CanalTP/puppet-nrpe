@@ -11,7 +11,7 @@ RETURN_CODE = 0
 URL = argv[1]
 
 try:
-        r = requests.get(URL)
+        r = requests.get(URL, proxies={"http": None, "https": None})
 
         metrics = r.json()
         nb_worker = metrics['gauges']['master.aliveWorkers']['value']
