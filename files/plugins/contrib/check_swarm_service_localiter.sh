@@ -62,7 +62,7 @@ function check_localiter()
     unset http_proxy 
     RET_CODE=$(curl -I $GET_SRV_STARTED:3000 -s -o /dev/null -w "%{http_code}")
 
-    if [ $RET_CODE -ne 200 ];then
+    if [ $RET_CODE -ne 200 ] || [ $RET_CODE -ne 302 ];then
            LOCALITER_RISE_AN_ERROR=1
            MSG_OUTPUT="$MSG_OUTPUT Localiter:[KO]"
     else
