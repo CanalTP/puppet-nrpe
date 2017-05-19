@@ -13,7 +13,8 @@ function usage {
 	printf "Example:\n"
 	printf "  \`%s /path/to/my/great/json/logs/root/dir 30\`\t→ checks if JSON files in /path/to/my/great/json/logs/root/dir are not older than 30 minutes\n" "$0"
 
-	exit 1
+	printf "\nUNKNOWN - Maybe bad arguments, you are in usage function\n"
+	exit 3
 }
 
 if [[ "$#" -eq 0 ]] || [[ "$#" -gt 2 ]] || [[ "$#" -eq 1 ]]; then
@@ -27,7 +28,13 @@ files_max_age_in_minutes="${2}"
 
 log_dir="${logs_root_dir}/${today_date}"
 
-find "${logs_root_dir}/${today_date}" -name "*.json.log" -type f -mmin +"${files_max_age_in_minutes}" -ls
+find_content=$(find "${logs_root_dir}/${today_date}" -name "*.json.log" -type f -mmin +"${files_max_age_in_minutes}" | tr '\n' ' ')
 
-exit 0
+if [ -z "$find_content" ]; then
+	printf "OK - pas de fichier plus vieux que %s minutes\n" "$files_max_age_in_minutes"
+	exit 0
+elif [ -n "$find_content" ]; then
+	printf "CRITICAL - fichier plus vieux que %s minutes : %s\n" "$files_max_age_in_minutes" "$find_content"
+	exit 2
+fi
 
