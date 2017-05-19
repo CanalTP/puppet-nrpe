@@ -184,6 +184,9 @@ command[check_sum_groovy]=<%= @config_plugins_dir %>/contrib/check-sum-cache.sh
 # Check stat worker
 command[check_stat_worker]=<%= @config_plugins_dir %>/contrib/check_stat_worker.py $ARG1$
 
+# Check stat logs
+command[check_stat_logs]=<%= @config_plugins_dir %>/contrib/check_stat_logs.sh $ARG1$ $ARG2$
+
 # Check Tridion
 command[check_odata]=/usr/lib64/nagios/plugins/contrib/check_tridion_odata.sh
 command[check_deployer]=/usr/lib64/nagios/plugins/contrib/check_tridion_deployer.sh
