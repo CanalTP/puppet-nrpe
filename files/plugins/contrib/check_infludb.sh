@@ -5,7 +5,7 @@ GET_PID_BY_SYSTEMCTL=$(systemctl status influxdb.service |grep "Main PID:"|awk '
 GET_PID_BY_PS=$(ps aux|grep influxdb|grep -v grep|grep -v $0|awk -F  " " '{print $2}')
 
 
- if [ ${GET_PID_BY_SYSTEMCTL} -eq ${GET_PID_BY_PS} ];then
+ if [ ! -z $GET_PID_BY_SYSTEMCTL ] && [ ${GET_PID_BY_SYSTEMCTL} -eq ${GET_PID_BY_PS} ];then
   	echo "[$HOSTNAME] Infludb service is up"
 	exit 0
  else

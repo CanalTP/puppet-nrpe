@@ -5,7 +5,7 @@ GET_PID_BY_SYSTEMCTL=$(systemctl status grafana-server.service |grep "Main PID:"
 GET_PID_BY_PS=$(ps aux|grep grafana|grep -v grep|grep -v $0|awk -F  " " '{print $2}')
 
 
- if [ ${GET_PID_BY_SYSTEMCTL} -eq ${GET_PID_BY_PS} ];then
+ if [ ! -z $GET_PID_BY_SYSTEMCTL ] && [ ${GET_PID_BY_SYSTEMCTL} -eq ${GET_PID_BY_PS} ];then
   	echo "[$HOSTNAME] Grafana service is up"
 	exit 0
  else
