@@ -6,7 +6,7 @@
 #Variables
 LOG_MONITOR=/var/download/traces/`date +%F`_monitor.log
 DATE_TIME=$(date +%F_%T)
-MSG_OUTPUT="OSM update report: "
+MSG_OUTPUT=""
 
 GLOBAL_OK=0
 STEP_2=0
