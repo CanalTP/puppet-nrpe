@@ -17,7 +17,7 @@ STEP_6=0
 
 function check_step_2
 {
-   cat $LOG_MONITOR |grep "STEP-2=KO"
+   cat $LOG_MONITOR |grep -q "STEP-2=KO"
    RET_CODE=$?
 
    if [ $RET_CODE -eq 0 ];then
@@ -30,7 +30,7 @@ function check_step_2
 
 function check_step_3
 {
-   cat $LOG_MONITOR |grep "STEP-3=KO"
+   cat $LOG_MONITOR |grep -q "STEP-3=KO"
    RET_CODE=$?
 
    if [ $RET_CODE -eq 0 ];then
@@ -43,7 +43,7 @@ function check_step_3
 
 function check_step_4
 {
-   cat $LOG_MONITOR |grep "STEP-4=KO"
+   cat $LOG_MONITOR |grep -q "STEP-4=KO"
    RET_CODE=$?
 
    if [ $RET_CODE -eq 0 ];then
@@ -56,7 +56,7 @@ function check_step_4
 
 function check_step_5
 {
-   cat $LOG_MONITOR |grep "STEP-5=KO"
+   cat $LOG_MONITOR |grep -q "STEP-5=KO"
    RET_CODE=$?
 
    if [ $RET_CODE -eq 0 ];then
@@ -70,7 +70,7 @@ function check_step_5
 
 function check_step_6
 {
-   cat $LOG_MONITOR |grep "STEP-6=KO"
+   cat $LOG_MONITOR |grep -q "STEP-6=KO"
    RET_CODE=$?
 
    if [ $RET_CODE -eq 0 ];then
