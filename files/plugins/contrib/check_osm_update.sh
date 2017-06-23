@@ -14,6 +14,7 @@ STEP_3=0
 STEP_4=0
 STEP_5=0
 STEP_6=0
+STEP_7=0
 
 function check_step_2
 {
@@ -81,18 +82,32 @@ function check_step_6
    fi
 }
 
+function check_step_7
+{
+   cat $LOG_MONITOR |grep -q "STEP-7=KO"
+   RET_CODE=$?
+
+   if [ $RET_CODE -eq 0 ];then
+           STEP_7=1
+           MSG_OUTPUT="$MSG_OUTPUT High level updating cache:[KO]"
+   else
+           MSG_OUTPUT="$MSG_OUTPUT High level updating cache::[OK]"
+   fi
+}
+
+
 # Launch here
 check_step_2
 check_step_3
 check_step_4
 check_step_5
 check_step_6
+check_step_7
 
-if [ $STEP_2 -eq 0 ] && [ $STEP_2 -eq 0 ] && [ $STEP_3 -eq 0 ] && [ $STEP_4 -eq 0 ] && [ $STEP_5 -eq 0 ] && [ $STEP_6 -eq 0 ];then
+if [ $STEP_2 -eq 0 ] && [ $STEP_2 -eq 0 ] && [ $STEP_3 -eq 0 ] && [ $STEP_4 -eq 0 ] && [ $STEP_5 -eq 0 ] && [ $STEP_6 -eq 0 ]&& [ $STEP_7 -eq 0 ];then
         echo "[OSM][REPORT_UPDATE] $MSG_OUTPUT"
         exit 0
 else
         echo "[OSM][REPORT_UPDATE] $MSG_OUTPUT"
         exit 2
 fi
-                                                                                                                                                                                                 
