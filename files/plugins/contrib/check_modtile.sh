@@ -5,7 +5,7 @@ URL=http://${HOSTNAME}:8080/mod_tiles
 RESULT=/tmp/result.out
 
 unset http_proxy 
-RET_CODE=$(curl -I $URL -s -o $RESULT -w "%{http_code}")
+RET_CODE=$(curl $URL -s -o $RESULT -w "%{http_code}")
 
  if [ $RET_CODE -eq 200 ];then
 	 NoResp200=$(cat $RESULT |grep "NoResp200"|awk -F ":" '{print $2}'|tr -d [:blank:])
