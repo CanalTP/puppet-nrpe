@@ -21,7 +21,7 @@ RET_CODE=$(curl $URL -s -o $RESULT -w "%{http_code}")
 	 DurationTileBufferReads=$(cat $RESULT |grep "DurationTileBufferReads"|awk -F ":" '{print $2}'|tr -d [:blank:])
 	 NoRes200Layer=$(cat $RESULT |grep "NoRes200Layer"|awk -F ":" '{print $2}'|tr -d [:blank:])
 	 NoRes404Layer=$(cat $RESULT |grep "NoRes404Layer"|awk -F ":" '{print $2}'|tr -d [:blank:])
-	 echo "Metriques modtile: NoResp200=$NoResp200, NoResp304=$NoResp304, NoResp404:$NoResp404, NoResp503=$NoResp503, NoFreshCache=$NoFreshCache, NoOldCache=$NoOldCache, NoVeryOldCache=$NoVeryOldCache, NoFreshRender=$NoFreshRender, NoOldRender=$NoOldRender, NoTileBufferReads=$NoTileBufferReads, DurationTileBufferReads=$DurationTileBufferReads, NoRes200Layer=$NoRes200Layer, NoRes404Layer=$NoRes404Layer" 
+	 echo "Metriques modtile: NoResp200=$NoResp200| NoResp304=$NoResp304| NoResp404:$NoResp404| NoResp503=$NoResp503| NoFreshCache=$NoFreshCache| NoOldCache=$NoOldCache| NoVeryOldCache=$NoVeryOldCache| NoFreshRender=$NoFreshRender| NoOldRender=$NoOldRender| NoTileBufferReads=$NoTileBufferReads| DurationTileBufferReads=$DurationTileBufferReads| NoRes200Layer=$NoRes200Layer| NoRes404Layer=$NoRes404Layer" 
 	 echo "[$HOSTNAME] Modtile is OK"
          exit 0
  else
