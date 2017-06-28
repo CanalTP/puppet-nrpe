@@ -203,3 +203,7 @@ command[check_telegraf]=<%= @config_plugins_dir %>/contrib/check_telegraf.sh
 # OSM
 command[check_osm_update]=<%= @config_plugins_dir %>/contrib/check_osm_update.sh
 command[check_modtile]=<%= @config_plugins_dir %>/contrib/check_modtile.sh
+
+# check failed executions on INL CMS - Synchronize incidents with database
+command[check_inl_cms_synchronizeIncidentsWithDB]=/usr/lib/nagios/plugins/contrib/check_inl_cms_synchronizeIncidentsWithDB.sh
+
