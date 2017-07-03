@@ -7,7 +7,7 @@
 
 # Take cert file as parameters.
 cert_file="${1}"
-date_limit="$(date -d "1 months ago" +%s)"
+date_limit="$(date -d "1 months" +%s)"
 
 function log4bash(){
 	local log_lvl="${1}"
