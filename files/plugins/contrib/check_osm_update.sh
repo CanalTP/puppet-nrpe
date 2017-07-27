@@ -62,9 +62,9 @@ function check_step_5
 
    if [ $RET_CODE -eq 0 ];then
            STEP_5=1
-           MSG_OUTPUT="$MSG_OUTPUT Applying update with osm2psql:[KO]"
+           MSG_OUTPUT="$MSG_OUTPUT Invalidate cache:[KO]"
    else
-           MSG_OUTPUT="$MSG_OUTPUT Applying update with osm2psql:[OK]"
+           MSG_OUTPUT="$MSG_OUTPUT Invalidate cache:[OK]"
    fi
 }
 
@@ -76,9 +76,9 @@ function check_step_6
 
    if [ $RET_CODE -eq 0 ];then
            STEP_6=1
-           MSG_OUTPUT="$MSG_OUTPUT Invalidate cache:[KO]"
+           MSG_OUTPUT="$MSG_OUTPUT Expiration des tuiles:[KO]"
    else
-           MSG_OUTPUT="$MSG_OUTPUT Invalidate cache:[OK]"
+           MSG_OUTPUT="$MSG_OUTPUT Expiration des tuiles:[OK]"
    fi
 }
 
