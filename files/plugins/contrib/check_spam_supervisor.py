@@ -86,8 +86,10 @@ if __name__ == "__main__":
 
         except ValueError:
             check_spam_service_output.append("Supervision {} no valid date".format(element.tag))
+            check_spam_service_status = 2
         except KeyError:
             check_spam_service_output.append("Supervision {} element missing".format(element.tag))
+            check_spam_service_status = 2
 
         # Get errors
         element_errors = int(element.find('errors').attrib['count'])
