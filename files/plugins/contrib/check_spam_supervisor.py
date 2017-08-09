@@ -64,17 +64,17 @@ if __name__ == "__main__":
     # Get information in each elements
     for element in supervisor_xml.getchildren():
 
-        if "last_feedback" in element.keys():
-            # Get element last run
-            element_last_feedback = dateutil.parser.parse(element.attrib['last_feedback'])
-
-            if element_last_feedback < supervision_last_feedback_limit:
-                check_spam_service_output.append("Supervision {} {} older than {}".format(element.tag,
-                                                                                          "last_feedback",
-                                                                                          supervision_last_feedback_limit.strftime("%Y-%m-%d %H:%M:%S")))
-                check_spam_service_status = 2
-
         try:
+            if "last_feedback" in element.keys():
+                # Get element last run
+                element_last_feedback = dateutil.parser.parse(element.attrib['last_feedback'])
+
+                if element_last_feedback < supervision_last_feedback_limit:
+                    check_spam_service_output.append("Supervision {} {} older than {}".format(element.tag,
+                                                                                              "last_feedback",
+                                                                                              supervision_last_feedback_limit.strftime("%Y-%m-%d %H:%M:%S")))
+                    check_spam_service_status = 2
+
             # Get element last feedback
             element_last_run = dateutil.parser.parse(element.attrib['last_run'])
 
@@ -85,10 +85,9 @@ if __name__ == "__main__":
                 check_spam_service_status = 2
 
         except ValueError:
-            check_spam_service_output.append("Supervision {} no {} correct value".format(element.tag, "last_run"))
-            check_spam_service_status = 2
+            check_spam_service_output.append("Supervision {} no valid date".format(element.tag))
         except KeyError:
-            check_spam_service_output.append("Supervision {} no {} key".format(element.tag, "last_run"))
+            check_spam_service_output.append("Supervision {} element missing".format(element.tag))
 
         # Get errors
         element_errors = int(element.find('errors').attrib['count'])
