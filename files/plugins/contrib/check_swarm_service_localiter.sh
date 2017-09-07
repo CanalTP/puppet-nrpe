@@ -57,7 +57,7 @@ function check_probe_ms()
 function check_localiter()
 {
     logger "[$DATE_TIME] Checking if microservice localiter is up"
-    GET_SRV_STARTED=$(docker -H localhost:2375 service ps ter-$COMPLETE_NAME-localiter|grep "Running"|tail -1|awk '{print $4}')
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps localiter_localiter |grep "Running"|tail -1|awk '{print $4}')
 
     unset http_proxy 
     RET_CODE=$(curl -I $GET_SRV_STARTED:3000 -s -o /dev/null -w "%{http_code}")
