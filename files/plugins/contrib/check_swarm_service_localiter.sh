@@ -8,7 +8,7 @@ LOCALITER_RISE_AN_ERROR=0
 UPLOAD_RISE_AN_ERROR=0
 OAUTH2_RISE_AN_ERROR=0
 
-LIST_MICROSERVICE="log-ms probe-ms localiter upload-ms oauth2-ms"
+LIST_MICROSERVICE="log-ms probe-ms localiter_localiter upload-ms oauth2-ms"
 MSG_OUTPUT="Scanning microservice report: "
 COMPLETE_NAME=$(echo $ENV_FLAG |tr '[A-Z]' '[a-z]')
 DATE_TIME=$(date +%F_%T)
