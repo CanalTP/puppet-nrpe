@@ -33,15 +33,15 @@ function nb_start_service()
 function check_hermod_service()
 {
     logger "[$DATE_TIME] Checking if api hermod responding"
-    unset https_proxy 
+    unset http_proxy 
     
-    curl -s -H $TOKEN $URL_TO_CHECK | grep \"status\"\:\"OK\" 
-    
+    curl -s -H "$TOKEN" $URL_TO_CHECK | grep "OK" 
+    RET_CODE=$?
 
-	 if [ $? -ne 0 ];then
-                 HERMOD_RISE_AN_ERROR=1
+	 if [ $RET_CODE -eq 0 ];then
                  MSG_OUTPUT="$MSG_OUTPUT and veryfing url status is OK"
          else 
+                 HERMOD_RISE_AN_ERROR=1
                  MSG_OUTPUT="$MSG_OUTPUT and veryfing url status is KO"
          fi
 }
