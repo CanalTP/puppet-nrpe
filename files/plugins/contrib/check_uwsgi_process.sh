@@ -20,16 +20,15 @@ if [ $COUNT_LAUNCHED_PROCESS -gt $NEED_PROCESS_LAUNCHED ];then
 	
 		if [ $? -ne 0 ];then
 			MSG_OUTPUT="$MSG_OUTPUT PID $get_pid:[KO]"
-			RISE_AN_ERROR=0
+			RISE_AN_ERROR=1
 		else
 			MSG_OUTPUT="$MSG_OUTPUT PID $get_pid:[OK]"
-			RISE_AN_ERROR=1
+			RISE_AN_ERROR=0
 		fi
 	done
 else
 	RISE_AN_ERROR=1
 fi
-
 
 if [ $RISE_AN_ERROR -eq 0 ];then
        echo "[Processus uwsgi] [$HOSTNAME] $MSG_OUTPUT"
