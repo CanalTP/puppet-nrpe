@@ -25,16 +25,35 @@ today_date=$(date +%Y/%m/%d)
 
 logs_root_dir="${1}"
 files_max_age_in_minutes="${2}"
-
+error=0
+output=""
 log_dir="${logs_root_dir}/${today_date}"
 
-find_content=$(find "${logs_root_dir}/${today_date}" -name "*.json.log" -type f -mmin +"${files_max_age_in_minutes}" | tr '\n' ' ')
 
-if [ -z "$find_content" ]; then
-	printf "OK - pas de fichier plus vieux que %s minutes\n" "$files_max_age_in_minutes"
-	exit 0
-elif [ -n "$find_content" ]; then
-	printf "CRITICAL - fichier plus vieux que %s minutes : %s\n" "$files_max_age_in_minutes" "$find_content"
-	exit 2
+f [ -z "$conteneur_id" ]; then
+        printf "OK - Pas de conteneurs stat-logger demarre sur ce noeud"
+        exit 0
 fi
+for id in $conteneur_id
+do
+        find_content=$(find "${logs_root_dir}/${today_date}" -name "*${id}*.json.log" -type f -mmin +"${files_max_age_in_minutes}" | tr '\n' ' ')
 
+        if [ -z "$find_content" ]; then
+                if [ error != 3 ]; then
+                        error=0
+                fi
+        elif [ -n "$find_content" ]; then
+                output="${output}CRITICAL - fichier plus vieux que $files_max_age_in_minutes minutes : $find_content\n"
+                error=2
+        fi
+done
+if [ "$error" -eq 2 ]; then
+        printf "$output"
+        exit 2
+fi
+if [ "$error" -eq 0 ]; then
+        printf "OK - Pas de fichier plus vieux que %s minutes."
+        exit 0
+fi
+printf "UNKNOWN: problem dans l'execution de la sonde"
+exit 3
