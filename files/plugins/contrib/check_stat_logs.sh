@@ -22,7 +22,7 @@ if [[ "$#" -eq 0 ]] || [[ "$#" -gt 2 ]] || [[ "$#" -eq 1 ]]; then
 fi
 
 today_date=$(date +%Y/%m/%d)
-
+conteneur_id=$(docker -H tcp://127.0.0.1:2375 ps |grep navitia-stat-logger| awk -F" " '{print $1}')
 logs_root_dir="${1}"
 files_max_age_in_minutes="${2}"
 error=0
@@ -30,7 +30,7 @@ output=""
 log_dir="${logs_root_dir}/${today_date}"
 
 
-f [ -z "$conteneur_id" ]; then
+if [ -z "$conteneur_id" ]; then
         printf "OK - Pas de conteneurs stat-logger demarre sur ce noeud"
         exit 0
 fi
@@ -52,7 +52,7 @@ if [ "$error" -eq 2 ]; then
         exit 2
 fi
 if [ "$error" -eq 0 ]; then
-        printf "OK - Pas de fichier plus vieux que %s minutes."
+        printf "OK - Pas de fichier plus vieux que ${files_max_age_in_minutes} minutes."
         exit 0
 fi
 printf "UNKNOWN: problem dans l'execution de la sonde"
