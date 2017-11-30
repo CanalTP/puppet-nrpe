@@ -160,6 +160,9 @@ command[check_rabbit_queues]=<%= @plugins_basedir %>/contrib/check_rabbit_queues
 # Check supervisord by container
 command[check_spam_supervisor]=<%= @config_plugins_dir %>/contrib/check_spam_supervisor.py -s $ARG1$ -c $ARG2$
 
+#check count pattern in file.
+command[check_pattern_count]=<%= @config_plugins_dir %>/contrib/check-count-pattern -logfile=$ARG1$ -offset=$ARG2$ -pattern="$ARG3$" -warn=$ARG4$ -crit=$ARG5$
+
 ######################################################
 ######               ACTIONS                   #######
 ######################################################
