@@ -22,8 +22,8 @@ check_reporting_status
 
  if [ $HERMOD_RISE_AN_ERROR -eq 0 ];then
 	echo "$MSG_OUTPUT"
-  	exit 0
+  	exit 2
  else
 	echo "$MSG_OUTPUT"
-	exit 2
+	exit 0
  fi
