@@ -1,0 +1,58 @@
+#!/bin/bash
+# Cette sonde permet de controler le nombre de bounce sur un serveur de mail 
+
+# Variable
+
+file=$1
+warning=$2
+critical=$3
+
+
+# Si on ne precise pas le fichier , on quitte le programme
+
+if [ -n "$file" ]
+then
+   # Recherche du nombre de bounce
+   
+   number_bounce=`pflogsumm -d today $file | grep bounced | grep -v time | awk '{print $1}'`
+   
+   # Si les paramètres warning et critical ne sont pas renseigné, on affiche uniquement le nombre de bounce
+   
+   if [ -z $warning ] || [ -z $critical ]
+   then 
+   	echo "$number_bounce mail bounced "
+   	exit 0
+   fi 
+   
+   # Code retour pour nagios
+   # 1 warning
+   # 2 critical
+   
+   if [ $number_bounce -lt $warning ]
+   then
+          echo "check mail bounced ok !|NUMBER_BOUNCE=$number_bounce" 
+          exit 0
+   fi
+   
+   # Code retour 1 entre le seuil de warning et critical
+   
+   if [ $number_bounce -ge $warning ] &&  [ $number_bounce -le $critical ]
+   then
+          echo "warning :  $warning > mail bounced > $critical !|NUMBER_BOUNCE=$number_bounce" 
+          exit 1
+   fi 
+   
+   # Code retour 2 si on dépasse le seuil critical  
+   
+   if [ $number_bounce -gt $critical ]
+   then
+          echo "critical : mail bounced > $critical !|NUMBER_BOUNCE=$number_bounce" 
+          exit 2
+   fi
+
+else
+
+   echo "L'argument 1 ( fichier de log ) est manquant"
+   exit 3 
+
+fi
