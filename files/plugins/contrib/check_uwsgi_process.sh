@@ -1,47 +1,66 @@
 #!/bin/bash
-# Check if uwsgi service launch correctly  
+# Check if uwsgi service is running correctly
 
-MSG_OUTPUT="Scanning all uwsgi launched process: "
+# Format output
+function log4bash(){
+	echo -e "[${1}] - ${2}"
+}
 
-CONFIG_FILE=/srv/jormungandr/jormungandr.ini
-URL_STATS="http://localhost:5050/_stats"
+# Get current memory usage
+function get_memory_usage(){
+	local pid_list=${1}
+	local total_mem=0
 
-total_mem=0
-
-NEED_PROCESS_LAUNCHED=$(cat $CONFIG_FILE |grep processes |awk  '{print $3 }')
-COUNT_LAUNCHED_PROCESS=$(ps -U www-data aux|grep uwsgi |grep -v grep|grep -v $0|wc -l)
-
-if [ $COUNT_LAUNCHED_PROCESS -gt $NEED_PROCESS_LAUNCHED ];then
-
-	for pid in `curl -s $URL_STATS |grep "pid"`
+	for pid in ${pid_list[*]};
 	do
-		get_pid=$(echo $pid |awk -F ':' '{print $2}'|sed 's/,//')	
-
-		ps -p $get_pid -o comm= &>/dev/null
-	
-		if [ $? -ne 0 ];then
-			MSG_OUTPUT="$MSG_OUTPUT PID $get_pid:[KO]"
-			RISE_AN_ERROR=1
-
-			# Quit loop
-			break
-		else
-			MSG_OUTPUT="$MSG_OUTPUT PID $get_pid:[OK]"
-			RISE_AN_ERROR=0
-
-			# Get memory usage
-			mem="$(ps --no-headers -p ${get_pid} -o rss)"
-			total_mem="$(( ${total_mem} + ${mem} ))"
-		fi
+		# Get mem
+		mem="$(ps --no-headers -p ${pid} -o rss)"
+		total_mem=$(( ${total_mem} + ${mem} ))
 	done
-else
-	RISE_AN_ERROR=1
+
+	# Return value
+	echo ${total_mem}
+}
+
+# Argument parser
+while getopts ":c:" opt;
+do
+	case ${opt} in
+	  c)
+		CONFIG_FILE=${OPTARG}
+		;;
+	  :)
+		log4bash "error" "Option -${OPTARG} requires an argument."
+		exit 3
+	  	;;
+	  \?)
+		log4bash "error" "Invalid option -${OPTARG}"
+		exit 3
+		;;
+	  *)
+		log4bash "error" "argument missing\n$(basename $0) -c uwsgi_config_file"
+		exit 3
+		;;
+	esac
+done
+
+# If no argument
+if [ $# == 0 ];
+then
+	log4bash "error" "argument missing\n$(basename $0) -c uwsgi_config_file"
+	exit 3
 fi
 
-if [ $RISE_AN_ERROR -eq 0 ];then
-       echo "[Processus uwsgi] [$HOSTNAME] $MSG_OUTPUT | TOTAL=${total_mem}KB"
-       exit 0
+CONFIG_NBR_PROCESS=$(awk '/processes/{print $3}' ${CONFIG_FILE})
+
+# Get current processes
+current_pid_process=( $(pidof uwsgi) )
+
+if [ ${#current_pid_process[@]} -lt ${CONFIG_NBR_PROCESS} ];
+then
+	log4bash "CRITICAL" "uWSGI processes missing | mem=$(get_memory_usage ${current_pid_process})KB;;;; nbr_process=${#current_pid_process[@]};;;;"
+	exit 2
 else
-       echo "[Processus uwsgi] [$HOSTNAME] $MSG_OUTPUT | TOTAL=${total_mem}KB"
-       exit 2
+	# All processes is running
+	log4bash "OK" "All uWSGI processes are running | mem=$(get_memory_usage ${current_pid_process})KB;;;; nbr_process=${#current_pid_process[@]};;;;"
 fi
