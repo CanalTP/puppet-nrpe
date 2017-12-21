@@ -213,13 +213,13 @@ command[check_osm_update]=<%= @config_plugins_dir %>/contrib/check_osm_update.sh
 command[check_modtile]=<%= @config_plugins_dir %>/contrib/check_modtile.sh
 
 # check failed executions on INL CMS - Synchronize incidents with database
-command[check_inl_cms_synchronizeIncidentsWithDB]=/usr/lib/nagios/plugins/contrib/check_inl_cms_synchronizeIncidentsWithDB.sh
+command[check_inl_cms_synchronizeIncidentsWithDB]=<%= @config_plugins_dir %>/contrib/check_inl_cms_synchronizeIncidentsWithDB.sh
 
 # Navitia check http error
-command[check_uwsgi_process]=/usr/lib/nagios/plugins/contrib/check_uwsgi_process.sh -c $ARG1$
+command[check_uwsgi_process]=<%= @config_plugins_dir %>/contrib/check_uwsgi_process.sh -c $ARG1$
 
 # Hermod cron checker
-command[check_hermod_cron]=/usr/lib/nagios/plugins/contrib/hermod_cron_check.sh
+command[check_hermod_cron]=<%= @config_plugins_dir %>/contrib/hermod_cron_check.sh
 
 # SMTP cron mail bounced [ add 21/12/2017 ]
 command[check_mail_bounced]=<%= @config_plugins_dir %>/contrib/check_bounce
