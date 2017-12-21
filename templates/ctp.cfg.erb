@@ -220,3 +220,6 @@ command[check_uwsgi_process]=/usr/lib/nagios/plugins/contrib/check_uwsgi_process
 
 # Hermod cron checker
 command[check_hermod_cron]=/usr/lib/nagios/plugins/contrib/hermod_cron_check.sh
+
+# SMTP cron mail bounced [ add 21/12/2017 ]
+command[check_mail_bounced]=<%= @config_plugins_dir %>/contrib/check_bounce
