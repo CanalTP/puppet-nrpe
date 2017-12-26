@@ -12,12 +12,34 @@ critical=$3
 
 if [ -n "$file" ]
 then
+
    # Recherche du nombre de bounce
+
+   number_bounce_by_day=`pflogsumm -d today $file | grep bounced | grep -v time | awk '{print $1}'`
    
-   number_bounce=`pflogsumm -d today $file | grep bounced | grep -v time | awk '{print $1}'`
+   if [ -z $number_bounce_by_day ]
+   then
+   	echo "0" > /tmp/number_bounce_by_day.txt 
+   	exit 3
+   fi 
+
+   if [ $number_bounce_by_day = "0" ]
+   then
+        echo "reset old value"
+        number_bounce_old="0"
+        echo "$number_bounce_old" > /tmp/number_bounce_by_day.txt 
    
-   # Si les paramètres warning et critical ne sont pas renseigné, on affiche uniquement le nombre de bounce
+   else
+   	number_bounce_old=`cat /tmp/number_bounce_by_day.txt`
+   fi 
    
+   number_bounce=$(($number_bounce_by_day - $number_bounce_old))
+   
+   echo $number_bounce_by_day > /tmp/number_bounce_by_day.txt 
+   
+
+   # Si les parametres warning et critical ne sont pas renseigné, on affiche uniquement le nombre de bounce
+
    if [ -z $warning ] || [ -z $critical ]
    then 
    	echo "$number_bounce mail bounced "
@@ -31,6 +53,7 @@ then
    if [ $number_bounce -lt $warning ]
    then
           echo "check mail bounced ok !|NUMBER_BOUNCE=$number_bounce" 
+          echo "TOTAL BOUNCE BY DAY=$number_bounce_by_day"
           exit 0
    fi
    
@@ -39,6 +62,7 @@ then
    if [ $number_bounce -ge $warning ] &&  [ $number_bounce -le $critical ]
    then
           echo "warning :  $warning > mail bounced > $critical !|NUMBER_BOUNCE=$number_bounce" 
+          echo "TOTAL BOUNCE BY DAY=$number_bounce_by_day"
           exit 1
    fi 
    
@@ -47,12 +71,15 @@ then
    if [ $number_bounce -gt $critical ]
    then
           echo "critical : mail bounced > $critical !|NUMBER_BOUNCE=$number_bounce" 
+          echo "TOTAL BOUNCE BY DAY=$number_bounce_by_day"
           exit 2
    fi
+
 
 else
 
    echo "L'argument 1 ( fichier de log ) est manquant"
+   echo "TOTAL BOUNCE BY DAY=$number_bounce_by_day"
    exit 3 
 
 fi
