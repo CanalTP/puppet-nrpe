@@ -31,6 +31,11 @@ then
    
    else
    	number_bounce_old=`cat /tmp/number_bounce_by_day.txt`
+        # initalisation: la première fois le fichier /tmp/number_bounce_by_day.txt est vide, on force la valeur de old a zero 
+	if [-z $number_bounce_old ]
+	then
+		number_bounce_old="0"
+	fi
    fi 
    
    number_bounce=$(($number_bounce_by_day - $number_bounce_old))
