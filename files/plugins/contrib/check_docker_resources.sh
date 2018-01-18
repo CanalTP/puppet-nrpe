@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #reccuperation des container en cours d'execution
-list_docker=`docker ps | awk -F" " '{print $12}'`
+list_docker=`docker ps --format '{{.Names}}'`
 
 IFS=$'\n'
 OUTPUT=""
