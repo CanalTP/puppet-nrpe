@@ -7,7 +7,7 @@ IFS=$'\n'
 OUTPUT=""
 PERFDATA="|"
 
-docker stats -H localhost:2375 --no-stream --all --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}" > /tmp/docker-ressources.txt
+docker -H localhost:2375 stats --no-stream --all --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}" > /tmp/docker-ressources.txt
 
 #pour chaque 
 for CONTAINER in $list_docker
