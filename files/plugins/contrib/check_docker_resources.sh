@@ -7,24 +7,24 @@ IFS=$'\n'
 OUTPUT=""
 PERFDATA="|"
 
+docker stats --no-stream --all --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}" > /tmp/docker-ressources.txt
+
 #pour chaque 
 for CONTAINER in $list_docker
 do
-	#echo $CONTAINER
-	RUNNING=$(docker inspect --format="{{ .State.Running }}" $CONTAINER 2> /dev/null)
-	GHOST=$(docker inspect --format="{{ .State.Dead }}" $CONTAINER)
-	STARTED=$(docker inspect --format="{{ .State.StartedAt }}" $CONTAINER | cut -d "." -f1)
-	NETWORK=$(docker inspect --format="{{ .NetworkSettings.IPAddress }}" $CONTAINER)
+	docker inspect $CONTAINER > /tmp/$CONTAINER-inpect.txt	
+	RUNNING=`grep -r "Running" /tmp/$CONTAINER-inpect.txt | awk '{print $2}' | sed -e s/,//g` 
+	CPU=`grep $CONTAINER /tmp/docker-ressources.txt | awk '{print $2}'`
+	MEMORY_USAGE_INFOS=`grep $CONTAINER /tmp/docker-ressources.txt | awk '{print $4}'| sed -e s/GiB/GB/ | sed -e s/MiB/MB/`
+	MEMORY_LIMIT_INFOS=`grep $CONTAINER /tmp/docker-ressources.txt | awk '{print $7}'| sed -e s/GiB/GB/ | sed -e s/MiB/MB/`
+	MEMORY_USAGE="`grep $CONTAINER /tmp/docker-ressources.txt | awk '{print $3}'`$MEMORY_USAGE_INFOS"
+	MEMORY_LIMIT="`grep $CONTAINER /tmp/docker-ressources.txt | awk '{print $6}'`$MEMORY_LIMIT_INFOS"
+		
+	CONTAINER_NAME=`echo $CONTAINER | awk -F '.' '{print $1}'`
+	PERFDATA="$PERFDATA cpu-$CONTAINER_NAME=$CPU mem_usage-$CONTAINER_NAME=$MEMORY_USAGE mem_limit-$CONTAINER_NAME=$MEMORY_LIMIT" 
 	
-	STATS=$(docker stats --no-stream $CONTAINER | tail -1)
-	CPU=$(echo $STATS | awk '{print $2}')
-	MEMUSAGE=$(echo $STATS | awk '{print $6}')
-	MEMUSED=$(echo $STATS | awk '{print $3$4}' | cut -d '/' -f1)
-	NETIN=$(echo $STATS | awk '{print $9$10}' | cut -d '/' -f1)
-	NETOUT=$(echo $STATS |  awk '{print $12$13}' | cut -d'/' -f2)
-	CONTAINER=$(echo $CONTAINER |  cut -d. -f1)
-	OUTPUT="$OUTPUT $CONTAINER is running. IP: $NETWORK, StartedAt: $STARTED\r\n"
-	PERFDATA="$PERFDATA cpu-${CONTAINER}=$CPU mem-${CONTAINER}=$MEMUSED netIn-${CONTAINER}=$NETIN netOut-${CONTAINER}=$NETOUT"
+	
+	#echo "CPU USAGE=$CPU" 
 done
 
-echo -e "$OUTPUT $PERFDATA"
+echo -e "PERF $PERFDATA"
