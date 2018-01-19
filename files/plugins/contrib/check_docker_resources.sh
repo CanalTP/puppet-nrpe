@@ -21,10 +21,11 @@ do
 	MEMORY_LIMIT="`grep $CONTAINER /tmp/docker-ressources.txt | awk '{print $6}'`$MEMORY_LIMIT_INFOS"
 		
 	CONTAINER_NAME=`echo $CONTAINER | awk -F '.' '{print $1}'`
+	CONTAINERS_RUNING="$CONTAINERS_RUNING $CONTAINER_NAME is running\n" 
 	PERFDATA="$PERFDATA cpu-$CONTAINER_NAME=$CPU mem_usage-$CONTAINER_NAME=$MEMORY_USAGE mem_limit-$CONTAINER_NAME=$MEMORY_LIMIT" 
 	
 	
 	#echo "CPU USAGE=$CPU" 
 done
 
-echo -e "PERF $PERFDATA"
+echo -e "$CONTAINERS_RUNING $PERFDATA"
