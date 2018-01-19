@@ -1,18 +1,18 @@
 #!/bin/bash
 
 #reccuperation des container en cours d'execution
-list_docker=`docker ps --format '{{.Names}}'`
+list_docker=`docker -H localhost:2375 ps --format '{{.Names}}'`
 
 IFS=$'\n'
 OUTPUT=""
 PERFDATA="|"
 
-docker stats --no-stream --all --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}" > /tmp/docker-ressources.txt
+docker stats -H localhost:2375 --no-stream --all --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}" > /tmp/docker-ressources.txt
 
 #pour chaque 
 for CONTAINER in $list_docker
 do
-	docker inspect $CONTAINER > /tmp/$CONTAINER-inpect.txt	
+	docker -H localhost:2375 inspect $CONTAINER > /tmp/$CONTAINER-inpect.txt	
 	RUNNING=`grep -r "Running" /tmp/$CONTAINER-inpect.txt | awk '{print $2}' | sed -e s/,//g` 
 	CPU=`grep $CONTAINER /tmp/docker-ressources.txt | awk '{print $2}'`
 	MEMORY_USAGE_INFOS=`grep $CONTAINER /tmp/docker-ressources.txt | awk '{print $4}'| sed -e s/GiB/GB/ | sed -e s/MiB/MB/`
