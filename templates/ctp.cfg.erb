@@ -218,7 +218,7 @@ command[check_mail_bounced]=<%= @config_plugins_dir %>/contrib/check_bounce
 command[check_docker_resources.sh]=<%= @config_plugins_dir %>/contrib/check_docker_resources.sh
 
 # Check MPD service (SUE)
-command[check_mpd]=<%= @config_plugins_dir %>/contrib/check_mpd_service.py -m $ARG1$ --perf_data
+command[check_mpd]=<%= @config_plugins_dir %>/contrib/check-mpd-status.py -m $ARG1$ --perf_data
 
 ######################################################
 ######               ACTIONS                   #######
