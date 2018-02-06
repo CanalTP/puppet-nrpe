@@ -17,28 +17,24 @@ function KO_doublons()
 {
 	count=$(find $KO_DOUBLONS -type f |wc -l)
         PERFDATA="| KO_doublons=$count"
-	echo -e "Metrics $PERFDATA"	
 }
 
 function KO_pas_transmis()
 {
 	count=$(find $KO_PAS_TRANSMIS -type f |wc -l)
-	PERFDATA="| KO_PAS_TRANSMIS=$count"
-	echo -e "KO_PAS_TRANSMIS $PERFDATA"
+	PERFDATA="$PERFDATA KO_PAS_TRANSMIS=$count"
 }
 
 function KO_schema_invalid()
 {
 	count=$(find $KO_SCHEMA_INVALID -type f |wc -l)
-	PERFDATA="| KO_SCHEMA_INVALID=$count"
-	echo -e "KO_SCHEMA_INVALID $PERFDATA"
+	PERFDATA="$PERFDATA KO_SCHEMA_INVALID=$count"
 }
 
 function OK_transmis()
 {
 	count=$(find $OK_TRANSMIS -type f |wc -l)
-        PERFDATA="| OK_TRANSMIS=$count"
-	echo -e "OK_TRANSMIS $PERFDATA"
+        PERFDATA="$PERFDATA OK_TRANSMIS=$count"
 }
 
 #Start application
@@ -46,3 +42,5 @@ KO_doublons
 KO_pas_transmis
 KO_schema_invalid
 OK_transmis
+
+echo -e "Metrics $PERFDATA"	
