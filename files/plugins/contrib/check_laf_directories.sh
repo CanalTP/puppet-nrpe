@@ -4,7 +4,6 @@
 ENV_VALUE=$(echo $HOSTNAME|cut -d "-" -f 2)
 DATE_TIME=$(date +%F_%T)
 
-PERFDATA="|"
 NFS_DIRECTORIES="/data/common/laf-nfs/save"
 
 # Needed directories
@@ -17,28 +16,28 @@ OK_TRANSMIS=$NFS_DIRECTORIES/OK_transmis
 function KO_doublons()
 {
 	count=$(find $KO_DOUBLONS -type f |wc -l)
-        PERFDATA="$PERFDATA KO_doublons=$count"
-	echo -e "KO_doublons $PERFDATA"	
+        PERFDATA="| KO_doublons=$count"
+	echo -e "Metrics $PERFDATA"	
 }
 
 function KO_pas_transmis()
 {
 	count=$(find $KO_PAS_TRANSMIS -type f |wc -l)
-	PERFDATA="$PERFDATA KO_PAS_TRANSMIS=$count"
+	PERFDATA="| KO_PAS_TRANSMIS=$count"
 	echo -e "KO_PAS_TRANSMIS $PERFDATA"
 }
 
 function KO_schema_invalid()
 {
 	count=$(find $KO_SCHEMA_INVALID -type f |wc -l)
-	PERFDATA="$PERFDATA KO_SCHEMA_INVALID=$count"
+	PERFDATA="| KO_SCHEMA_INVALID=$count"
 	echo -e "KO_SCHEMA_INVALID $PERFDATA"
 }
 
 function OK_transmis()
 {
 	count=$(find $OK_TRANSMIS -type f |wc -l)
-        PERFDATA="$PERFDATA OK_TRANSMIS=$count"
+        PERFDATA="| OK_TRANSMIS=$count"
 	echo -e "OK_TRANSMIS $PERFDATA"
 }
 
