@@ -10,7 +10,6 @@ NFS_DIRECTORIES="/data/common/laf-nfs/save"
 KO_DOUBLONS=$NFS_DIRECTORIES/KO_doublons
 KO_PAS_TRANSMIS=$NFS_DIRECTORIES/KO_pas_transmis
 KO_SCHEMA_INVALID=$NFS_DIRECTORIES/KO_schema_invalid
-OK_TRANSMIS=$NFS_DIRECTORIES/OK_transmis
 
 
 function KO_doublons()
@@ -31,16 +30,10 @@ function KO_schema_invalid()
 	PERFDATA="$PERFDATA KO_SCHEMA_INVALID=$count"
 }
 
-function OK_transmis()
-{
-	count=$(find $OK_TRANSMIS -type f |wc -l)
-        PERFDATA="$PERFDATA OK_TRANSMIS=$count"
-}
 
 #Start application
 KO_doublons
 KO_pas_transmis
 KO_schema_invalid
-OK_transmis
 
 echo -e "Metrics $PERFDATA"	
