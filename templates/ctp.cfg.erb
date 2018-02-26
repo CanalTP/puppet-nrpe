@@ -179,6 +179,10 @@ command[check_mongo_backup]=<%= @config_plugins_dir %>/contrib/status_mongo_back
 #Check sum configuration
 command[check_sum_groovy]=<%= @config_plugins_dir %>/contrib/check-sum-cache.sh
 
+#Check invalid format
+command[sum_search_invalid_format]=<%= @config_plugins_dir %>/contrib/sum_search_invalid_format.sh
+
+
 # Check stat worker
 command[check_stat_worker]=<%= @config_plugins_dir %>/contrib/check_stat_worker.py $ARG1$
 
