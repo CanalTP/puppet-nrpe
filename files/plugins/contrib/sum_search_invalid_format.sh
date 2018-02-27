@@ -3,7 +3,7 @@
 
 LOG_DIR=/var/lib/tomcat7-sum/logs/sum-server2
 FILENAME=SumServer.log
-PID_FILE=/tmp/$0.pid
+PID_FILE=/tmp/sum_search_invalid_format.pid
 FLAG_TO_SEARCH="java.lang.IllegalArgumentException: Invalid format: | is malformed at"
 
 function clean_process
