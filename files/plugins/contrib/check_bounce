@@ -7,6 +7,10 @@ file=$1
 warning=$2
 critical=$3
 
+if [ -n "/tmp/number_bounce_by_day.txt" ]
+then
+   touch /tmp/number_bounce_by_day.txt
+fi 
 
 # Si on ne precise pas le fichier , on quitte le programme
 
@@ -32,7 +36,7 @@ then
    else
    	number_bounce_old=`cat /tmp/number_bounce_by_day.txt`
         # initalisation: la première fois le fichier /tmp/number_bounce_by_day.txt est vide, on force la valeur de old a zero 
-	if [-z $number_bounce_old ]
+	if [ -z $number_bounce_old ]
 	then
 		number_bounce_old="0"
 	fi
