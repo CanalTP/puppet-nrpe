@@ -54,19 +54,35 @@ function check_probe_ms()
     fi
 }
 
-function check_localiter()
+function check_shiva()
 {
-    logger "[$DATE_TIME] Checking if microservice localiter is up"
-    GET_SRV_STARTED=$(docker -H localhost:2375 service ps localiter_localiter |grep "Running"|tail -1|awk '{print $4}')
+    logger "[$DATE_TIME] Checking if microservice shiva is up"
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps shiva_shiva |grep "Running"|tail -1|awk '{print $4}')
 
     unset http_proxy 
     RET_CODE=$(curl -I $GET_SRV_STARTED:3000 -s -o /dev/null -w "%{http_code}")
 
     if [ $RET_CODE -ne 200 ] && [ $RET_CODE -ne 302 ];then
-           LOCALITER_RISE_AN_ERROR=1
-           MSG_OUTPUT="$MSG_OUTPUT Localiter:[KO]"
+           SHIVA_RISE_AN_ERROR=1
+           MSG_OUTPUT="$MSG_OUTPUT Shiva:[KO]"
     else
-           MSG_OUTPUT="$MSG_OUTPUT Localiter:[OK]"
+           MSG_OUTPUT="$MSG_OUTPUT Shiva:[OK]"
+    fi
+}
+
+function check_shiva-app-event()
+{
+    logger "[$DATE_TIME] Checking if microservice shiva-app-event is up"
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps shiva-app-event_shiva-app-event |grep "Running"|tail -1|awk '{print $4}')
+
+    unset http_proxy 
+    RET_CODE=$(curl -I $GET_SRV_STARTED:3000 -s -o /dev/null -w "%{http_code}")
+
+    if [ $RET_CODE -ne 200 ] && [ $RET_CODE -ne 302 ];then
+           SHIVA_APP_EVENT_RISE_AN_ERROR=1
+           MSG_OUTPUT="$MSG_OUTPUT Shiva-app-event:[KO]"
+    else
+           MSG_OUTPUT="$MSG_OUTPUT Shiva-app-event:[OK]"
     fi
 }
 
@@ -104,13 +120,12 @@ function check_oauth()
 
 #Call functions
 check_parameters $ENV_FLAG
-check_log_ms
 check_probe_ms
-check_localiter
-check_upload
+check_shiva
+check_shiva-app-event
 check_oauth
 
- if [ $PROBE_RISE_AN_ERROR -eq 0 ] && [ $LOG_RISE_AN_ERROR -eq 0 ] && [ $LOCALITER_RISE_AN_ERROR -eq 0 ] && [ $UPLOAD_RISE_AN_ERROR -eq 0 ] && [ $OAUTH2_RISE_AN_ERROR -eq 0 ];then
+ if [ $PROBE_RISE_AN_ERROR -eq 0 ] && [ $LOG_RISE_AN_ERROR -eq 0 ] && [ $SHIVA_RISE_AN_ERROR -eq 0 ] [ $SHIVA_APP_EVENT_RISE_AN_ERROR -eq 0 ] && [ $OAUTH2_RISE_AN_ERROR -eq 0 ];then
 	echo "[CLUSTER_SWARM] [MICROSERVICE] $MSG_OUTPUT"
   	exit 0
  else
