@@ -60,7 +60,7 @@ function check_shiva()
     GET_SRV_STARTED=$(docker -H localhost:2375 service ps shiva_shiva |grep "Running"|tail -1|awk '{print $4}')
 
     unset http_proxy 
-    RET_CODE=$(curl -I $GET_SRV_STARTED:3000 -s -o /dev/null -w "%{http_code}")
+    RET_CODE=$(curl -I $GET_SRV_STARTED:3003 -s -o /dev/null -w "%{http_code}")
 
     if [ $RET_CODE -ne 200 ] && [ $RET_CODE -ne 302 ];then
            SHIVA_RISE_AN_ERROR=1
@@ -75,13 +75,15 @@ function check_shiva-app-event()
     logger "[$DATE_TIME] Checking if microservice shiva-app-event is up"
     GET_SRV_STARTED=$(docker -H localhost:2375 service ps shiva-app-event_shiva-app-event |grep "Running"|tail -1|awk '{print $4}')
 
-    unset http_proxy 
-    RET_CODE=$(curl -I $GET_SRV_STARTED:3000 -s -o /dev/null -w "%{http_code}")
-
-    if [ $RET_CODE -ne 200 ] && [ $RET_CODE -ne 302 ];then
+    unset http_proxy
+    l_TELNET=`echo "quit" | telnet $GET_SRV_STARTED 3004 | grep "Escape character is"` 
+    
+    if [ "$?" -ne 0 ]; then
+    # if [ $RET_CODE -ne 200 ] && [ $RET_CODE -ne 302 ];then
            SHIVA_APP_EVENT_RISE_AN_ERROR=1
            MSG_OUTPUT="$MSG_OUTPUT Shiva-app-event:[KO]"
     else
+           SHIVA_APP_EVENT_RISE_AN_ERROR=0
            MSG_OUTPUT="$MSG_OUTPUT Shiva-app-event:[OK]"
     fi
 }
@@ -125,7 +127,9 @@ check_shiva
 check_shiva-app-event
 check_oauth
 
- if [ $PROBE_RISE_AN_ERROR -eq 0 ] && [ $LOG_RISE_AN_ERROR -eq 0 ] && [ $SHIVA_RISE_AN_ERROR -eq 0 ] [ $SHIVA_APP_EVENT_RISE_AN_ERROR -eq 0 ] && [ $OAUTH2_RISE_AN_ERROR -eq 0 ];then
+echo $SHIVA_APP_EVENT_RISE_AN_ERROR
+
+ if [ $PROBE_RISE_AN_ERROR -eq 0 ] && [ $SHIVA_RISE_AN_ERROR -eq 0 ] && [ $SHIVA_APP_EVENT_RISE_AN_ERROR -eq 0 ] && [ $OAUTH2_RISE_AN_ERROR -eq 0 ];then
 	echo "[CLUSTER_SWARM] [MICROSERVICE] $MSG_OUTPUT"
   	exit 0
  else
