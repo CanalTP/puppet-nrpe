@@ -127,8 +127,6 @@ check_shiva
 check_shiva-app-event
 check_oauth
 
-echo $SHIVA_APP_EVENT_RISE_AN_ERROR
-
  if [ $PROBE_RISE_AN_ERROR -eq 0 ] && [ $SHIVA_RISE_AN_ERROR -eq 0 ] && [ $SHIVA_APP_EVENT_RISE_AN_ERROR -eq 0 ] && [ $OAUTH2_RISE_AN_ERROR -eq 0 ];then
 	echo "[CLUSTER_SWARM] [MICROSERVICE] $MSG_OUTPUT"
   	exit 0
