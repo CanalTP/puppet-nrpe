@@ -4,7 +4,8 @@
 ENV_FLAG=$1
 LOG_RISE_AN_ERROR=0
 PROBE_RISE_AN_ERROR=0
-LOCALITER_RISE_AN_ERROR=0
+SHIVA_RISE_AN_ERROR=0
+SHIVA_APP_EVENT_RISE_AN_ERROR=0
 UPLOAD_RISE_AN_ERROR=0
 OAUTH2_RISE_AN_ERROR=0
 
@@ -83,7 +84,6 @@ function check_shiva-app-event()
            SHIVA_APP_EVENT_RISE_AN_ERROR=1
            MSG_OUTPUT="$MSG_OUTPUT Shiva-app-event:[KO]"
     else
-           SHIVA_APP_EVENT_RISE_AN_ERROR=0
            MSG_OUTPUT="$MSG_OUTPUT Shiva-app-event:[OK]"
     fi
 }
