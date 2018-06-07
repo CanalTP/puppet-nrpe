@@ -21,7 +21,7 @@ function check_parameters()
 
 function nb_start_service()
 {
-   GET_COUNT_SERVICE=$(docker -H localhost:2375 stack ps $LIST_MICROSERVICE | awk '{if (NR!=1) {print}}'| grep "Running" |awk '{print $5}'| wc -l) 
+   GET_COUNT_SERVICE=$(docker -H localhost:2375 stack ps $LIST_MICROSERVICE | grep -ivE "remove|shutdown" | awk '{if (NR!=1) {print}}'| grep "Running" |awk '{print $5}'| wc -l) 
    if [ $GET_COUNT_SERVICE -ne 10 ]
    then
 	MSG_NODE="Replicated node is KO"
@@ -31,7 +31,7 @@ function nb_start_service()
 function check_wit_service()
 {
     logger "[$DATE_TIME] Checking if microservice is up"
-    GET_SRV=$(docker -H localhost:2375 stack ps $LIST_MICROSERVICE | awk '{if (NR!=1) {print}}' | grep "Running"|awk '{print $4}'|sort|uniq)
+    GET_SRV=$(docker -H localhost:2375 stack ps $LIST_MICROSERVICE | grep -ivE "remove|shutdown" | awk '{if (NR!=1) {print}}' | grep "Running"|awk '{print $4}'|sort|uniq)
     unset http_proxy 
 
     for srv in `echo $GET_SRV`
