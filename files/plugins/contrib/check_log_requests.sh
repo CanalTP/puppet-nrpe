@@ -28,9 +28,9 @@ then
 		# line ex.: Jan  7 16:50:59 sum-prd-fo3 sum.canaltp.fr: 10.93.4.2 - - [07/Jan/2015:16:50:58 +0100] "GET /services/navitiaV3?wsdl HTTP/1.1" 200 25760 "-" "-" -
 		if [ ! -z $3 ]
 		then
-			nb_requests=$(cat $log | egrep "[[:space:]]$hour:($one_minute_before|$two_minutes_before|$three_minutes_before|$four_minutes_before):" | egrep "$pattern" | grep -v "sumcache-ws.sum.prod.canaltp.prod" | wc --lines)
+			nb_requests=$(tail -n 500000 $log | egrep "[[:space:]]$hour:($one_minute_before|$two_minutes_before|$three_minutes_before|$four_minutes_before):" | egrep "$pattern" | grep -v "sumcache-ws.sum.prod.canaltp.prod" | wc --lines)
 		else
-			nb_requests=$(cat $log | egrep "[[:space:]]$hour:($one_minute_before|$two_minutes_before|$three_minutes_before|$four_minutes_before):" |grep -v "sumcache-ws.sum.prod.canaltp.prod" | wc --lines)
+			nb_requests=$(tail -n 500000 $log | egrep "[[:space:]]$hour:($one_minute_before|$two_minutes_before|$three_minutes_before|$four_minutes_before):" |grep -v "sumcache-ws.sum.prod.canaltp.prod" | wc --lines)
 		fi
 		nb_requests_by_minute=$(echo $nb_requests/$period | bc)
 		echo "$nb_requests_by_minute average requests on the last $period minutes| req_min=$nb_requests_by_minute"
