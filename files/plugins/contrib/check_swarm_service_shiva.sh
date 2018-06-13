@@ -26,7 +26,7 @@ function check_parameters()
 function check_log_ms()
 { 
     logger "[$DATE_TIME] Checking if microservice log-ms is up"
-    GET_SRV_STARTED=$(docker -H localhost:2375 service ps ter-$COMPLETE_NAME-log-ms|grep "Running"|tail -1|awk '{print $4}')
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps ter-$COMPLETE_NAME-log-ms | grep -ivE "remove|shutdown" | awk '{if (NR!=1) {print}}' | grep "Running" | awk '{print $4}' | sort | uniq)
    
     unset http_proxy 
     RET_CODE=$(curl -I $GET_SRV_STARTED:3603 -s -o /dev/null -w "%{http_code}") 
@@ -42,7 +42,7 @@ function check_log_ms()
 function check_probe_ms()
 {   
     logger "[$DATE_TIME] Checking if microservice probe-ms is up"
-    GET_SRV_STARTED=$(docker -H localhost:2375 service ps ter-$COMPLETE_NAME-probe-ms|grep "Running"|tail -1|awk '{print $4}')
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps ter-$COMPLETE_NAME-probe-ms | grep -ivE "remove|shutdown" | awk '{if (NR!=1) {print}}' | grep "Running" | awk '{print $4}' | sort | uniq)
     
     unset http_proxy 
     RET_CODE=$(curl -I $GET_SRV_STARTED:3602 -s -o /dev/null -w "%{http_code}")
@@ -58,7 +58,7 @@ function check_probe_ms()
 function check_shiva()
 {
     logger "[$DATE_TIME] Checking if microservice shiva is up"
-    GET_SRV_STARTED=$(docker -H localhost:2375 service ps shiva_shiva |grep "Running"|tail -1|awk '{print $4}')
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps shiva_shiva  | grep -ivE "remove|shutdown" | awk '{if (NR!=1) {print}}' | grep "Running" | awk '{print $4}' | sort | uniq)
 
     unset http_proxy 
     RET_CODE=$(curl -I $GET_SRV_STARTED:3003 -s -o /dev/null -w "%{http_code}")
@@ -74,7 +74,7 @@ function check_shiva()
 function check_shiva-app-event()
 {
     logger "[$DATE_TIME] Checking if microservice shiva-app-event is up"
-    GET_SRV_STARTED=$(docker -H localhost:2375 service ps shiva-app-event_shiva-app-event |grep "Running"|tail -1|awk '{print $4}')
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps shiva-app-event_shiva-app-event | grep -ivE "remove|shutdown" | awk '{if (NR!=1) {print}}' | grep "Running" | awk '{print $4}' | sort | uniq)
 
     unset http_proxy
     l_TELNET=`echo "quit" | telnet $GET_SRV_STARTED 3004 | grep "Escape character is"` 
@@ -91,7 +91,7 @@ function check_shiva-app-event()
 function check_upload()
 {
     logger "[$DATE_TIME] Checking if microservice upload is up"
-    GET_SRV_STARTED=$(docker -H localhost:2375 service ps ter-$COMPLETE_NAME-upload-ms|grep "Running"|tail -1|awk '{print $4}')
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps ter-$COMPLETE_NAME-upload-ms | grep -ivE "remove|shutdown" | awk '{if (NR!=1) {print}}' | grep "Running" | awk '{print $4}' | sort | uniq)
 
     unset http_proxy 
     RET_CODE=$(curl -I $GET_SRV_STARTED:3001/getConfig -s -o /dev/null -w "%{http_code}")
@@ -107,7 +107,7 @@ function check_upload()
 function check_oauth()
 {
     logger "[$DATE_TIME] Checking if microservice oauth2 is up"
-    GET_SRV_STARTED=$(docker -H localhost:2375 service ps ter-$COMPLETE_NAME-oauth2-ms|grep "Running"|tail -1|awk '{print $4}')
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps ter-$COMPLETE_NAME-oauth2-ms | grep -ivE "remove|shutdown" | awk '{if (NR!=1) {print}}' | grep "Running" | awk '{print $4}' | sort | uniq)
 
     unset http_proxy 
     RET_CODE=$(curl -I $GET_SRV_STARTED:43000 -s -o /dev/null -w "%{http_code}")
