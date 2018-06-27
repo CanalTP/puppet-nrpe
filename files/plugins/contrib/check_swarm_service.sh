@@ -32,7 +32,7 @@ fi
 ###########
 function check_microservice()
 {
-  echo logger "[$DATE_TIME] Checking if microservice $MICROSERVICE is up"
+  logger "[$DATE_TIME] Checking if microservice $MICROSERVICE is up"
   GET_SRV_STARTED=$(docker -H localhost:2375 service ps $MICROSERVICE | grep -ivE "remove|shutdown" | tail -n+2 | grep "Running")
 
   if [ -z "$GET_SRV_STARTED" ]
