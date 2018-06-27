@@ -11,6 +11,8 @@
 MICROSERVICE_RISE_AN_ERROR=0
 MSG_OUTPUT="Scanning microservice report: "
 DATE_TIME=$(date +%F_%T)
+# I'm trying to figure out if I'm a worker or a manager
+DOCKER_WORKER=$(docker -H localhost:2375 service ps $MICROSERVICE 2>&1 | grep -q "This node is not a swarm manager")
 
 
 ######################
@@ -18,8 +20,7 @@ DATE_TIME=$(date +%F_%T)
 ###########
 if [[ -z $1 || $1 == "--help" || $1 == "-h" ]]
 then
-  echo -e "ERROR : You must specify an argument. Running services are : $(docker service ls | awk '{print $2}' | tail -n+2  | xargs)\n"
-  echo -e "If you need to check multiple services at once, concatenate them with a comma ','"
+  echo -e "ERROR : You must specify an argument. If you need to check multiple services at once, concatenate them with a comma ','"
   echo -e "Example : $0 service1,service2,..."
   exit 1
 else
@@ -28,12 +29,21 @@ fi
 
 
 ######################
-# Uniq function to check all microservice at once
+# function to check a container or a service
 ###########
 function check_microservice()
 {
   logger "[$DATE_TIME] Checking if microservice $MICROSERVICE is up"
-  GET_SRV_STARTED=$(docker -H localhost:2375 service ps $MICROSERVICE | grep -ivE "remove|shutdown" | tail -n+2 | grep "Running")
+
+  # Depending what am I, I'll use "docker ps" or "docker service"
+  if [[ $DOCKER_WORKER -eq "0" ]]
+  then
+    # As a Worker, I'm using docker ps...
+    GET_SRV_STARTED=$(docker -H localhost:2375 ps --format "{{.Names}} {{.Status}}" | grep -E "^$MICROSERVICE\..* Up")
+  else
+    # As a Manager, I'm using docker service...
+    GET_SRV_STARTED=$(docker -H localhost:2375 service ps $MICROSERVICE --format "{{.Name}} {{.CurrentState}}" | grep "Running")
+  fi
 
   if [ -z "$GET_SRV_STARTED" ]
   then
