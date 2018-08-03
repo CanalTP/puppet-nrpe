@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Permet de verifier le nombre de worker atifs
+# Permet de verifier le nombre de worker actifs
 #
 # File managed by puppet, don't edit directly
 #
@@ -33,17 +33,17 @@ nb_wrk = node.get("workers")
 workers = node.findall('Worker')
 
 if (int(nb_wrk) <= options.warning) & (int(nb_wrk) > options.critical) :
-	print('WARNING : Il y a seulement %c worker(s) actif(s) : %s' % \
-		(nb_wrk, \
-		', '.join([ gethostbyaddr(worker.attrib['hostname'])[0].replace('.canaltp.prod', '') for worker in workers ])))
+	print('WARNING  : Il y a seulement '+str(nb_wrk)+' worker(s) actif(s) : ')
+        for worker in workers:
+		print gethostbyaddr(worker.attrib['hostname'])[0].replace('.canaltp.prod', ''),
         exit(1) # WARNING
 if int(nb_wrk) <= options.critical :
-	print('CRITICAL : Il y a seulement %c worker(s) actif(s) : %s' % \
-		(nb_wrk, \
-		', '.join([ gethostbyaddr(worker.attrib['hostname'])[0].replace('.canaltp.prod', '') for worker in workers ])))
-        exit(2) # CRITICAL
+	print('CRITICAL : Il y a seulement '+str(nb_wrk)+' worker(s) actif(s) : ')
+        for worker in workers:
+                print gethostbyaddr(worker.attrib['hostname'])[0].replace('.canaltp.prod', ''),
+	exit(2) # CRITICAL
 if int(nb_wrk) > options.warning :
-        print('OK : Les %c workers sont Ok' % nb_wrk)
+        print('OK : Les '+str(nb_wrk)+' workers sont Ok')
         exit(0) # OK
 print('UNKNOWN : Erreur dans la recuperation des workers actifs')
 exit(3)
