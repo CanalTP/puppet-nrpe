@@ -20,7 +20,9 @@ equipement="f5 palo_alto fortigate ucs sw"
 #sw="pa4-n5k1-prd.canaltp.prod pa4-n5k2-prd.canaltp.prod ctp-prd-vsm2.canaltp.prod pa4-sw1-prd.canaltp.prod-running-config pa4-sw1-prd.canaltp.prod-vlan.dat pa4-sw1-adm.canaltp.prod-running-config pa4-sw1-adm.canaltp.prod-vlan.dat"
 f5="pa4-lc1-prd.canaltp.prod pa4-lc2-prd.canaltp.prod pa4-adc1-prd.canaltp.prod pa4-adc2-prd.canaltp.prod"
 palo_alto="pa4-fw1-prd.canaltp.prod pa4-fw2-prd.canaltp.prod"
-ucs="ucs.export ucs.backup"
+#old uscs check modif by hakim benyaacoub ucs="ucs.export ucs.backup"
+ucs="ucs.export-PA4 ucs.backup-PA4 ucs.export_PA2 ucs.backup_PA2"
+
 sw="pa4-n5k1-prd.canaltp.prod pa4-n5k2-prd.canaltp.prod pa4-sw1-prd.canaltp.prod-running-config pa4-sw1-prd.canaltp.prod-vlan.dat pa4-sw1-adm.canaltp.prod-running-config pa4-sw1-adm.canaltp.prod-vlan.dat"
 
 erreur=3
