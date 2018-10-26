@@ -15,9 +15,11 @@ chemin=/srv/backups
 equipement="f5 palo_alto fortigate ucs sw"
 
 #Liste des fichiers par equipement
+# Before update 26/10
+#fortigate="fortigate-pa4-fw1-adm.canaltp.prod"
+#sw="pa4-n5k1-prd.canaltp.prod pa4-n5k2-prd.canaltp.prod ctp-prd-vsm2.canaltp.prod pa4-sw1-prd.canaltp.prod-running-config pa4-sw1-prd.canaltp.prod-vlan.dat pa4-sw1-adm.canaltp.prod-running-config pa4-sw1-adm.canaltp.prod-vlan.dat"
 f5="pa4-lc1-prd.canaltp.prod pa4-lc2-prd.canaltp.prod pa4-adc1-prd.canaltp.prod pa4-adc2-prd.canaltp.prod"
 palo_alto="pa4-fw1-prd.canaltp.prod pa4-fw2-prd.canaltp.prod"
-fortigate="fortigate-pa4-fw1-adm.canaltp.prod"
 ucs="ucs.export ucs.backup"
 sw="pa4-n5k1-prd.canaltp.prod pa4-n5k2-prd.canaltp.prod ctp-prd-vsm2.canaltp.prod pa4-sw1-prd.canaltp.prod-running-config pa4-sw1-prd.canaltp.prod-vlan.dat pa4-sw1-adm.canaltp.prod-running-config pa4-sw1-adm.canaltp.prod-vlan.dat"
 
