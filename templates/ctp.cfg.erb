@@ -31,6 +31,9 @@ command[check_dispatcher_loadMonitoring]=<%= @config_plugins_dir %>/contrib/chec
 # check pour Backoffice 
 command[check_log_crons_tft2]=<%= @config_plugins_dir %>/contrib/check_log_crons_tft2.sh $ARG1$ "$ARG2$" $ARG3$
 
+# check pour log cron generique
+command[check_log_cron]=<%= @config_plugins_dir %>/contrib/check_log_cron.sh $ARG1$ "$ARG2$" $ARG3$
+
 # check pour WebService 
 command[check_tft2_webservice_sender]=<%= @config_plugins_dir %>/contrib/check_tft2_webservice_sender.py --file $ARG1$ --error $ARG2$
 
