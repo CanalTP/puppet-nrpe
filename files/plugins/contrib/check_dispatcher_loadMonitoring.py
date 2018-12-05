@@ -9,8 +9,8 @@ from datetime import datetime, timedelta
 import os
 
 FILE = '/tmp/supervision.xml'
-WARN_DELTA = 20
-CRITICAL_DELTA = 60
+WARN_DELTA = 120
+CRITICAL_DELTA = 160
 
 #On verifie si le dispatcher est actif
 date_fic = os.path.getmtime(FILE)
