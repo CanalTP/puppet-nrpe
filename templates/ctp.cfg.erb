@@ -234,7 +234,7 @@ command[check_laf_directories]=<%= @config_plugins_dir %>/contrib/check_laf_dire
 command[check_mpd]=<%= @config_plugins_dir %>/contrib/check-mpd-status.py -m $ARG1$ --perf_data
 
 # Check redis connexion
-command[check_redis_connexion]=<%= @config_plugins_dir %>/contrib/check_redis_connexion $ARG1$
+command[check_redis_connexion]=<%= @config_plugins_dir %>/contrib/check_redis_cli.sh $ARG1$
 
 ######################################################
 ######               ACTIONS                   #######
