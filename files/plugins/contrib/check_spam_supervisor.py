@@ -58,7 +58,7 @@ if __name__ == "__main__":
         check_spam_service_status = 2
 
     # Set limit for each element
-    supervision_last_run_limit = datetime.now() - timedelta(minutes=5)
+    supervision_last_run_limit = datetime.now() - timedelta(minutes=60)
     supervision_last_feedback_limit = datetime.now() - timedelta(hours=25)
 
     # Get information in each elements
