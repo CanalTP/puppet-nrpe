@@ -166,6 +166,9 @@ command[check_spam_supervisor]=<%= @config_plugins_dir %>/contrib/check_spam_sup
 #check count pattern in file.
 command[check_pattern_count]=<%= @config_plugins_dir %>/contrib/check-count-pattern -logfile=$ARG1$ -offset=$ARG2$ -pattern="$ARG3$" -warn=$ARG4$ -crit=$ARG5$
 
+#check pattern in last x min from log file (ARG1= attern, ARG2=time in minutes, arg3=log file).
+command[check_pattern_date_log]=<%= @config_plugins_dir %>/contrib/check_pattern_date_log.pl $ARG1$ $ARG2$ $ARG3$
+
 # Check docker containers
 command[check_docker_running_containers]=<%= @config_plugins_dir %>/contrib/check_docker.py --status running --connection $ARG1$ --containers $ARG2$
 
