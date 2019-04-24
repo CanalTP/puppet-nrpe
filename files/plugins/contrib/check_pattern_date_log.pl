@@ -42,6 +42,6 @@ while (defined($line = $LOGS->readline) ) {
         last;
     }
 }
-print "OK - There are no \"$search\" in the last $interval minutes$log_file\n";
+print "OK - There are no \"$search\" in the last $interval minutes in $log_file\n";
 close(LOGS);
 exit 0;
