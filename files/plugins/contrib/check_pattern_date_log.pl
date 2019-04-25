@@ -13,7 +13,7 @@ if ($num_args != 3) {
     exit;
 }
 
-$search = $ARGV[0];
+$search = $ARGV[0] =~ s/\-\+\-/\|/gr;
 $interval = $ARGV[1];
 $log_file = $ARGV[2];
 $time_zone = 'Europe/Paris';
@@ -33,6 +33,7 @@ while (defined($line = $LOGS->readline) ) {
 
     if (($dt > $now - $delta)) {
         if ($line =~ m/$search/){
+	    $search = $search  =~ s/\|/ or /gr;
 	    print "CRITICAL - There are \"$search\" in the last $interval minutes in $log_file\n";
 	    close(LOGS);
 	    exit 2;
@@ -42,6 +43,7 @@ while (defined($line = $LOGS->readline) ) {
         last;
     }
 }
+$search = $search  =~ s/\|/ or /gr;
 print "OK - There are no \"$search\" in the last $interval minutes in $log_file\n";
 close(LOGS);
 exit 0;
